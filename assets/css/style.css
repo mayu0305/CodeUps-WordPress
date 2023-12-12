@@ -1288,30 +1288,30 @@ textarea:focus {
 	margin-top: 2.5rem;
 }
 
-.policy-terms__body-text:not(:first-of-type) {
+.policy-terms__body p:first-of-type + ol {
 	margin-top: 2rem;
 }
 
-.policy-terms__body-numlist {
+.policy-terms__body p:not(:first-of-type) {
+	margin-top: 2rem;
+}
+
+.policy-terms__body ol {
 	list-style: auto;
 	list-style-type: decimal;
 	padding-left: 1.4em;
 }
 
-.policy-terms__body-numlist .policy-terms__body-dotlist {
+.policy-terms__body ol ul {
 	margin-left: -1.3em;
 	margin-top: 0;
 }
 
-.policy-terms__body-numlist + .policy-terms__body-numlist {
+.policy-terms__body ol + ol {
 	margin-top: 2rem;
 }
 
-.policy-terms__body-dotlist {
-	margin-top: 2rem;
-}
-
-.policy-terms__body-text--first + ol {
+.policy-terms__body ul {
 	margin-top: 2rem;
 }
 

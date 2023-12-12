@@ -1,6 +1,8 @@
 
     <?php if( is_page('8') ) : ?>
         <footer class="footer footer--404">
+    <?php elseif ( is_page( array('14','16','18') ) ) :?>
+        <footer class="footer footer--contact">
     <?php else: ?>
         <footer class="footer">
     <?php endif; ?>

@@ -84,11 +84,18 @@
                                                 )
                                             </span>
                                             <span class="card-tag">
-                                            ライセンス講習
+                                                <?php
+                                                    $terms = get_the_terms(get_the_ID(), 'item-course');
+
+                                                    if ($terms && !is_wp_error($terms)) {
+                                                        $category = array_shift($terms);
+                                                        echo $category->name;
+                                                    }
+                                                ?>
                                             </span>
                                         </div>
                                         <h2 class="voice-card__header-title">
-                                            ここにタイトルが入ります。ここにタイトル
+                                            <?php the_title(); ?>
                                         </h2>
                                     </div><!--voice-card__header-text -->
                                     <figure class="voice-card__header-img js-scroll">
@@ -99,7 +106,7 @@
                                     </figure>
                                 </div><!--voice-card__header -->
                                 <div class="voice-card__text">
-                                <?php the_content(); ?>
+                                    <?php the_content(); ?>
                                 </div>
                             </li><!-- voice-card -->
 

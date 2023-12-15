@@ -58,74 +58,35 @@
             <section class="aboutAs-gallery page-content__section">
                 <div class="inner">
                     <div class="section-title">
-                      <span class="section-title__sub" aria-hidden="true">Gallery</span>
-                      <h2 class="section-title__main">フォト</h2>
+                        <span class="section-title__sub" aria-hidden="true">Gallery</span>
+                        <h2 class="section-title__main">フォト</h2>
                     </div>
                     <div class="aboutAs-gallery__post gallery-post">
                         <div class="gallery-post__grid-items">
-                          <button class="modal-btn gallery-post__grid-item" data-micromodal-trigger="modal-1" aria-label="モーダル2のボタン">
-                              <img class="gallery-img" src="<?php echo get_theme_file_uri(); ?>/assets/images/about-us/aboutus-gallery01.webp" alt="ギャラリー写真1" decoding="async" loading="lazy">
-                          </button>
-                          <button class="modal-btn gallery-post__grid-item" data-micromodal-trigger="modal-2" aria-label="モーダル2のボタン">
-                              <img class="gallery-img" src="<?php echo get_theme_file_uri(); ?>/assets/images/about-us/aboutus-gallery02.webp" alt="ギャラリー写真2" decoding="async" loading="lazy">
-                          </button>
-                          <button class="modal-btn gallery-post__grid-item" data-micromodal-trigger="modal-3" aria-label="モーダル3のボタン">
-                              <img class="gallery-img" src="<?php echo get_theme_file_uri(); ?>/assets/images/about-us/aboutus-gallery03.webp" alt="ギャラリー写真3" decoding="async" loading="lazy">
-                          </button>
-                          <button class="modal-btn gallery-post__grid-item" data-micromodal-trigger="modal-4" aria-label="モーダル3のボタン">
-                              <img class="gallery-img" src="<?php echo get_theme_file_uri(); ?>/assets/images/about-us/aboutus-gallery04.webp" alt="ギャラリー写真4" decoding="async" loading="lazy">
-                          </button>
-                          <button class="modal-btn gallery-post__grid-item" data-micromodal-trigger="modal-5" aria-label="モーダル3のボタン">
-                              <img class="gallery-img" src="<?php echo get_theme_file_uri(); ?>/assets/images/about-us/aboutus-gallery05.webp" alt="ギャラリー写真5" decoding="async" loading="lazy">
-                          </button>
-                          <button class="modal-btn gallery-post__grid-item" data-micromodal-trigger="modal-6" aria-label="モーダル3のボタン">
-                              <img class="gallery-img" src="<?php echo get_theme_file_uri(); ?>/assets/images/about-us/aboutus-gallery06.webp" alt="ギャラリー写真6" decoding="async" loading="lazy">
-                          </button>
-                      </div>
+                            <?php
+                                $link_group = SCF::get('gallery-image__list');
+                                foreach ($link_group as $fields ) {
+                                ?>
+                                <button class="modal-btn gallery-post__grid-item" data-micromodal-trigger="modal-<?php echo $fields['gallery-order']; ?>" aria-label="モーダルボタン">
+                                    <img class="gallery-img" src="<?php echo wp_get_attachment_url($fields['gallery-image']); ?>" alt="<?php echo $fields['gallery-alt']; ?>" decoding="async" loading="lazy">
+                                </button>
+                            <?php } ?>
+                        </div>
 
                         <div class="gallery-post__modal-slide">
-                            <div class="micromodal-slide" id="modal-1" aria-hidden="true">
-                                <div class="modal__overlay" tabindex="-1" data-micromodal-close>
-                                    <div class="modal__container" role="dialog" aria-modal="true">
-                                        <img class="gallery-img_lg" src="<?php echo get_theme_file_uri(); ?>/assets/images/about-us/aboutus-gallery01.webp" alt="ギャラリー写真1" data-micromodal-close />
+                            <?php
+                                $link_group = SCF::get('gallery-image__list');
+                                foreach ($link_group as $fields ) {
+                                ?>
+                                <div class="micromodal-slide" id="modal-<?php echo $fields['gallery-order']; ?>" aria-hidden="true">
+                                    <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+                                        <div class="modal__container" role="dialog" aria-modal="true">
+                                            <img class="gallery-img_lg" src="<?php echo wp_get_attachment_url($fields['gallery-image']); ?>" alt="<?php echo $fields['gallery-alt']; ?>" data-micromodal-close />
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="micromodal-slide" id="modal-2" aria-hidden="true">
-                                <div class="modal__overlay" tabindex="-1" data-micromodal-close>
-                                    <div class="modal__container" role="dialog" aria-modal="true">
-                                        <img class="gallery-img_lg" src="<?php echo get_theme_file_uri(); ?>/assets/images/about-us/aboutus-gallery02.webp" alt="ギャラリー写真2" data-micromodal-close />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="micromodal-slide" id="modal-3" aria-hidden="true">
-                                <div class="modal__overlay" tabindex="-1" data-micromodal-close>
-                                    <div class="modal__container" role="dialog" aria-modal="true">
-                                        <img class="gallery-img_lg" src="<?php echo get_theme_file_uri(); ?>/assets/images/about-us/aboutus-gallery03.webp" alt="ギャラリー写真3" data-micromodal-close />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="micromodal-slide" id="modal-4" aria-hidden="true">
-                                <div class="modal__overlay" tabindex="-1" data-micromodal-close>
-                                    <div class="modal__container" role="dialog" aria-modal="true">
-                                        <img class="gallery-img_lg" src="<?php echo get_theme_file_uri(); ?>/assets/images/about-us/aboutus-gallery04.webp" alt="ギャラリー写真4" data-micromodal-close />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="micromodal-slide" id="modal-5" aria-hidden="true">
-                                <div class="modal__overlay" tabindex="-1" data-micromodal-close>
-                                    <div class="modal__container" role="dialog" aria-modal="true">
-                                        <img class="gallery-img_lg" src="<?php echo get_theme_file_uri(); ?>/assets/images/about-us/aboutus-gallery05.webp" alt="ギャラリー写真5" data-micromodal-close />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="micromodal-slide" id="modal-6" aria-hidden="true">
-                                <div class="modal__overlay" tabindex="-1" data-micromodal-close>
-                                    <div class="modal__container" role="dialog" aria-modal="true">
-                                        <img class="gallery-img_lg" src="<?php echo get_theme_file_uri(); ?>/assets/images/about-us/aboutus-gallery06.webp" alt="ギャラリー写真6" data-micromodal-close />
-                                    </div>
-                                </div>
-                            </div>
+                            <?php } ?>
+
                         </div><!-- gallery-post__modal-slide -->
 
                     </div><!-- aboutAs-gallery__post gallery-post -->

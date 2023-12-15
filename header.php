@@ -4,32 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1.0" />
   <meta name="format-detection" content="telephone=no" />
-  <meta name="robots" content="noindex" />
-  <!-- meta情報 -->
-  <title>CodeUps</title>
-  <meta name="description" content="新CodeUps課題サイトです。" />
-  <meta name="keywords" content="" />
-  <!-- ogp -->
-  <meta property="og:title" content="CodeUps TOPぺージ" />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://lien-create.com/new-codeups/index.html" />
-  <meta property="og:image" content="https://lien-create.com/new-codeups/assets/images/index/fv01_pc.webp" />
-  <meta property="og:site_name" content="CodeUps" />
-  <meta property="og:description" content="新CodeUps課題サイトです。" />
-  <!-- ファビコン -->
-  <link rel="”icon”" href="" />
-  <!-- googlefonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Gotu&family=Lato&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
-  <!-- css -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.3.1/swiper-bundle.min.css">
-  <link rel="stylesheet" href="<?php echo get_theme_file_uri(); ?>/assets/css/style.css" />
-  <!-- JavaScript -->
-  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-  <script src="https://unpkg.com/swiper@8.3.1/swiper-bundle.min.js"></script>
-  <script defer src="<?php echo get_theme_file_uri(); ?>/assets/js/jquery.inview.min.js"></script>
-  <script defer src="<?php echo get_theme_file_uri(); ?>/assets/js/script.js"></script>
+<?php  wp_head(); ?>
 </head>
 <body>
   <header class="header js-header">

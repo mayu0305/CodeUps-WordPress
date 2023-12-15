@@ -417,6 +417,7 @@ a {
 	-o-object-fit: cover;
 	aspect-ratio: 121/90;
 	object-fit: cover;
+	height: auto;
 }
 
 .aside-campaign {
@@ -1530,6 +1531,7 @@ textarea:focus {
 	aspect-ratio: 300/200;
 	object-fit: cover;
 	transition: 0.5s;
+	height: auto;
 }
 
 .blog-cards--page {

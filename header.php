@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html <?php language_attributes(); ?>>
 <head prefix="og: https://ogp.me/ns#">
-  <meta charset="UTF-8" />
+  <meta charset="<?php bloginfo( 'charset' ); ?>" />
   <meta name="viewport" content="width=device-width,initial-scale=1.0" />
   <meta name="format-detection" content="telephone=no" />
 <?php  wp_head(); ?>

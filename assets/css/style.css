@@ -1541,6 +1541,7 @@ textarea:focus {
 
 .breadcrumb {
 	margin-top: 0.5rem;
+	font-size: 0.875rem;
 }
 
 .breadcrumb__inner {
@@ -1561,6 +1562,12 @@ textarea:focus {
 	z-index: 0;
 }
 
+.breadcrumb__inner > span[property]{
+	display: inline-block;
+	position: relative;
+	text-transform: uppercase;
+}
+
 .breadcrumb__items {
 	display: flex;
 }
@@ -1571,16 +1578,16 @@ textarea:focus {
 	text-transform: uppercase;
 }
 
-.breadcrumb__item a:hover {
+.breadcrumb__inner > span[property] a:hover {
 	-webkit-text-decoration: underline;
 	text-decoration: underline;
 }
 
-.breadcrumb__item:not(:first-of-type) {
+.breadcrumb__inner > span[property]:not(:first-of-type) {
 	padding-left: 1.25rem;
 }
 
-.breadcrumb__item:not(:first-of-type)::before {
+.breadcrumb__inner > span[property]:not(:first-of-type)::before {
 	-webkit-mask-image: url(../images/common/breadcrumb-arrow.svg);
 	-webkit-mask-size: contain;
 	-webkit-mask-repeat: no-repeat;
@@ -1602,7 +1609,7 @@ textarea:focus {
 	color: #fff;
 }
 
-.breadcrumb--404 .breadcrumb__item:not(:first-of-type)::before {
+.breadcrumb--404 .breadcrumb__inner > span[property]:not(:first-of-type)::before {
 	background-color: #fff;
 }
 

@@ -12,24 +12,7 @@
         <h1 class="page-header__title">Contact</h1>
     </div>
 
-    <div class="breadcrumb">
-        <div class="inner breadcrumb__inner">
-            <ul class="breadcrumb__items">
-                <li class="breadcrumb__item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
-                    <a href="./" title="Top" itemprop="item"><span itemprop="name">Top</span></a>
-                    <meta itemprop="position" content="1">
-                </li>
-                <li class="breadcrumb__item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
-                  <a href="./" title="お問い合わせ" itemprop="item"><span itemprop="name">お問い合わせ</span></a>
-                  <meta itemprop="position" content="2">
-                </li>
-                <li class="breadcrumb__item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
-                    <span itemprop="name">お問い合わせエラー</span>
-                    <meta itemprop="position" content="3">
-                </li>
-            </ul>
-        </div>
-    </div>
+    <?php get_template_part( 'template-parts/breadcrumb' ); ?>
 
     <div class="page-content contact">
         <div class="inner inner--narrow">

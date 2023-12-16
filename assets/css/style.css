@@ -2456,6 +2456,39 @@ textarea:focus {
 	justify-content: center;
 }
 
+.pagination__links .wp-pagenavi {
+	display: flex;
+	gap: 0.75rem;
+	justify-content: center;
+}
+
+.pagination__links .page,
+.pagination__links .current{
+	align-items: center;
+    border: 0.0625rem solid #408F95;
+    color: #408F95;
+    display: flex;
+    font-family: "Lato", sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    height: 2.375rem;
+    justify-content: center;
+    line-height: 0;
+    transition: 0.3s;
+    width: 2.375rem;
+}
+
+.pagination__links .current{
+	background-color: #408F95;
+    color: #fff;
+}
+
+.pagination__links .page:hover {
+    background-color: #408F95;
+    color: #fff;
+    transition: 0.3s;
+}
+
 .section-contact {
 	position: relative;
 }

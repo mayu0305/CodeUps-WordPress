@@ -18,23 +18,18 @@
             <div class="inner">
                 <div class="blog-content__body">
                     <div class="blog-content__main">
-
+                        <article class="blog-content__main-items blog-cards blog-cards--page">
                         <?php
-                            $paged = get_query_var('paged')? get_query_var('paged') : 1;
                             $args = array(
                                 'post_type' => 'blog',
                                 'posts_per_page' => 5,
-                                'paged' => $paged,
+                                'paged' => get_query_var('paged') ? get_query_var('paged') : 1,
                             );
                             $query = new WP_Query($args);
-                        ?>
 
-                            <article class="blog-content__main-items blog-cards blog-cards--page">
-
-                        <?php
                             if ($query->have_posts()) :
                                 while ($query->have_posts()) : $query->the_post();
-                        ?>
+                                    ?>
                                     <a href="<?php the_permalink(); ?>" class="blog-card blog-cards__item">
                                         <div class="blog-card__content">
                                             <time class="blog-card__content-date" datetime="<?php the_time('Y-m-d'); ?>">
@@ -60,29 +55,25 @@
                                             <?php endif ; ?>
                                         </figure>
                                     </a><!-- blog-card -->
-                        <?php
-                            endwhile;
-                            wp_reset_postdata();
+                                    <?php
+                                endwhile;
+
+                                
+                                // ページナビゲーションを表示
+                                if (function_exists('wp_pagenavi')) {
+                                    wp_pagenavi(array('query' => $query));
+                                }
+
+                                // ループをリセット
+                                wp_reset_postdata();
+
 
                             else :
                                 echo '投稿がありません。';
                             endif;
                         ?>
-
                         </article><!-- blog-cards -->
-
-                        <?php
-                            if(function_exists('wp_pagenavi'))  : ?>
-                                <div class="blog-content__page-nav">
-                                    <h2 class="screen-reader-text visually-hidden">投稿ナビゲーション</h2>
-                                    <div class="pagination__links">
-                                        <?php wp_pagenavi(array('query' => $query)); ?>
-                                    </div>
-                                </div>
-                        <?php endif;
-                        ?>
-
-                        <!-- <div class="blog-content__page-nav">
+                        <div class="blog-content__page-nav">
                             <nav class="navigation pagination" aria-label="投稿">
                                 <h2 class="screen-reader-text visually-hidden">投稿ナビゲーション</h2>
                                 <div class="pagination__links">
@@ -96,9 +87,8 @@
                                     <a class="next page-numbers" href=""></a>
                                 </div>
                             </nav>
-                        </div> -->
-
-                    </div><!-- blog-content__main -->
+                        </div>
+                    </div>
 
                     <aside class="aside blog-content__side">
                         <div class="aside__content aside-article">
@@ -261,7 +251,7 @@
                             </div><!-- aside-archive__items-->
                         </div><!-- aside__content aside-archive -->
 
-                    </aside><!-- aside blog-content__side -->
+                    </aside>
                 </div>
             </div><!-- inner -->
         </div>

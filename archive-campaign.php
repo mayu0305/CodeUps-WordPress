@@ -51,7 +51,7 @@
                                     // カテゴリー(ターム)を指定する場合に書く↓
                                     'tax_query' => array(
                                             array(
-                                                'taxonomy' => 'item-course', // タクソノミーのスラッグ
+                                                'taxonomy' => 'campaign_category', // タクソノミーのスラッグ
                                                 'field' => 'slug',
                                                 'terms' => array('fun', 'license', 'trial'), // タームのスラッグ（複数指定可能）
                                             ),
@@ -67,7 +67,7 @@
                                         <div class="campaign-card__content-header">
                                             <span span class="card-tag">
                                                 <?php
-                                                    $terms = get_the_terms(get_the_ID(), 'item-course');
+                                                    $terms = get_the_terms(get_the_ID(), 'campaign_category');
 
                                                     if ($terms && !is_wp_error($terms)) {
                                                         $category = array_shift($terms);

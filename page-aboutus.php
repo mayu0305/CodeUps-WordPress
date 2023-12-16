@@ -12,41 +12,7 @@
             <h1 class="page-header__title">About us</h1>
         </div>
 
-        <div class="breadcrumbs" typeof="BreadcrumbList" vocab="https://schema.org/">
-            <?php if(function_exists('bcn_display'))
-            {
-                bcn_display();
-            }?>
-        </div>
-
-        <!-- パンくずプラグイン出力されるコード -->
-        <div class="breadcrumbs" typeof="BreadcrumbList" vocab="https://schema.org/">
-            <!-- Breadcrumb NavXT 7.2.0 -->
-            <span property="itemListElement" typeof="ListItem">
-                <a property="item" typeof="WebPage" title="CodeUpsへ移動する" href="http://codeups.local" class="home" >
-                    <span property="name">TOP</span>
-                </a>
-                <meta property="position" content="1">
-            </span> &gt;
-            <span property="itemListElement" typeof="ListItem">
-                <span property="name" class="post post-page current-item">私たちについて</span>
-                <meta property="url" content="http://codeups.local/aboutus/">
-                <meta property="position" content="2"></span>
-        </div>
-        <div class="breadcrumb">
-            <div class="inner breadcrumb__inner">
-                <ul class="breadcrumb__items">
-                    <li class="breadcrumb__item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
-                        <a href="./" title="Top" itemprop="item"><span itemprop="name">Top</span></a>
-                        <meta itemprop="position" content="1">
-                    </li>
-                    <li class="breadcrumb__item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
-                        <span itemprop="name">私たちについて</span>
-                        <meta itemprop="position" content="2">
-                    </li>
-                </ul>
-            </div>
-        </div>
+        <?php get_template_part( 'template-parts/breadcrumb' ); ?>
 
         <div class="page-content">
 

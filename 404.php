@@ -1,20 +1,8 @@
 <?php get_header(); ?>
 
     <main class="main error-404">
-        <div class="breadcrumb breadcrumb--404">
-            <div class="inner breadcrumb__inner">
-                <ul class="breadcrumb__items">
-                    <li class="breadcrumb__item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
-                        <a href="./" title="Top" itemprop="item"><span itemprop="name">Top</span></a>
-                        <meta itemprop="position" content="1">
-                    </li>
-                    <li class="breadcrumb__item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
-                        <span itemprop="name">404</span>
-                        <meta itemprop="position" content="2">
-                    </li>
-                </ul>
-            </div>
-        </div>
+
+        <?php get_template_part( 'template-parts/breadcrumb' ); ?>
 
         <div class="page-content page-content--404">
             <div class="inner">

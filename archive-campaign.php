@@ -14,6 +14,20 @@
 
         <?php get_template_part( 'template-parts/breadcrumb' ); ?>
 
+
+
+        <h2>カテゴリ</h2>
+<ul>
+    <li><a href="<?php echo esc_url(home_url()); ?>/campaign/">All Categories</a></li>
+    <?php
+    $terms = get_terms('campaign_category'); //←タクソノミーのスラッグ名を記載する
+    foreach ($terms as $term) {
+        echo '<li><a href="' . get_term_link($term) . '">' . $term->name . '</a></li>';
+    }
+    ?>
+</ul>
+
+
         <div class="campaign-content page-content">
             <div class="inner">
                 <div class="course-tab campaign-content__tab">

@@ -250,22 +250,6 @@
                     </div>
                 </div><!-- course-tab -->
 
-                <!-- <div class="campaign-content__page-nav">
-                    <nav class="navigation pagination" aria-label="投稿">
-                        <h2 class="screen-reader-text visually-hidden">投稿ナビゲーション</h2>
-                        <div class="pagination__links">
-                            <a class="prev page-numbers" href=""></a>
-                            <span aria-current="page" class="page-numbers current">1</span>
-                            <a class="page-numbers" href="">2</a>
-                            <a class="page-numbers" href="">3</a>
-                            <a class="page-numbers" href="">4</a>
-                            <a class="page-numbers page-numbers--pc-only" href="">5</a>
-                            <a class="page-numbers page-numbers--pc-only" href="">6</a>
-                            <a class="next page-numbers" href=""></a>
-                        </div>
-                    </nav>
-                </div> -->
-
                 <div class="campaign-content__page-nav">
                     <nav class="navigation pagination" aria-label="投稿">
                         <h2 class="screen-reader-text visually-hidden">投稿ナビゲーション</h2>

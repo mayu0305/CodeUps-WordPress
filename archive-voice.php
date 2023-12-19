@@ -33,7 +33,7 @@
             </div>
 
                 <div class="js-panelGroup course-tab__panel-wrap">
-                    <div class="course-tab__panel js-cPanel is-active">
+                    <div class="course-tab__panel js-cPanel is-active" id="vPanel-1">
                         <ul class="page-voice__items voice-cards">
                         <?php if ( have_posts() ) : ?>
                             <?php while ( have_posts() ) : the_post(); ?>
@@ -93,7 +93,7 @@
                         </ul><!-- page-voice__items voice-cards -->
                     </div><!-- course-tab__panel -->
 
-                    <?php foreach ($terms as $value) : ?>
+                    <?php foreach ($terms as $key => $value) : ?>
                         <?php
                         $term_slug = $value->slug;
                         $args = array(
@@ -107,7 +107,7 @@
                         $myquery = new WP_Query($args);
                         ?>
 
-                    <div class="course-tab__panel js-cPanel">
+                    <div class="course-tab__panel js-cPanel" id="vPanel-<?php echo $key + 2; ?>">
                         <ul class="page-voice__items voice-cards">
                         <?php
                             if ($myquery->have_posts()) : ?>

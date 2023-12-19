@@ -34,7 +34,7 @@
 
 
                 <div class="js-panelGroup course-tab__panel-wrap">
-                    <div class="course-tab__panel js-cPanel is-active">
+                    <div class="course-tab__panel js-cPanel is-active" id="cPanel-1">
                         <div class="campaign-cards">
                         <?php if ( have_posts() ) : ?>
                             <?php while ( have_posts() ) : the_post(); ?>
@@ -95,7 +95,7 @@
                         </div>
                     </div><!-- course-tab__panel -->
 
-                    <?php foreach ($terms as $value) : ?>
+                    <?php foreach ($terms as $key => $value) : ?>
                         <?php
                         $term_slug = $value->slug;
                         $args = array(
@@ -109,7 +109,7 @@
                         $myquery = new WP_Query($args);
                         ?>
 
-                        <div class="course-tab__panel js-cPanel">
+                        <div class="course-tab__panel js-cPanel" id="cPanel-<?php echo $key + 2; ?>">
                             <div class="campaign-cards">
                                 <?php
                                     if ($myquery->have_posts()) : ?>

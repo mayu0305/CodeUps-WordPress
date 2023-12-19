@@ -16,18 +16,24 @@
 
         <div class="page-content page-voice">
             <div class="inner">
-                <div class="page-content__tab course-tab">
-                    <div class="course-tab__items" role="tablist" aria-labelledby="tablist-label">
-                        <button class="course-tab__item -active js-tab" type="button" role="tab" id="tab1" aria-controls="tab-panel1"
-                            aria-selected="true">ALL</button>
-                        <button class="course-tab__item js-tab" type="button" role="tab" id="tab2" aria-controls="tab-panel2" aria-selected="false"
-                            tabindex="-1">ライセンス講習</button>
-                        <button class="course-tab__item js-tab" type="button" role="tab" id="tab3" aria-controls="tab-panel3" aria-selected="false"
-                            tabindex="-1">ファンダイビング</button>
-                        <button class="course-tab__item js-tab" type="button" role="tab" id="tab4" aria-controls="tab-panel4" aria-selected="false"
-                        tabindex="-1">体験ダイビング</button>
-                    </div>
-                    <div id="tab-panel1" class="course-tab__panel js-tab-panel -active" role="tabpanel" tabindex="0" aria-labelledby="tab1">
+
+            <?php
+                $taxonomy_slug = 'voice_category';
+                $post_type_slug = 'voice';
+                $terms = get_terms($taxonomy_slug);
+            ?>
+
+            <div class="js-tabGroup course-tab__items">
+                <button class="course-tab__item js-cTab is-active">All</button>
+                <?php foreach ($terms as $value) : ?>
+                    <button class="course-tab__item js-cTab">
+                            <?php echo esc_html($value->name); ?>
+                    </button>
+                <?php endforeach; ?>
+            </div>
+
+                <div class="js-panelGroup course-tab__panel-wrap">
+                    <div class="course-tab__panel js-cPanel is-active">
                         <ul class="page-voice__items voice-cards">
                         <?php if ( have_posts() ) : ?>
                             <?php while ( have_posts() ) : the_post(); ?>
@@ -53,15 +59,15 @@
                                                 <?php endif; ?>
                                                 )
                                             </span>
-                                            <span class="card-tag">
+                                            <span span class="card-tag">
                                                 <?php
-                                                    $terms = get_the_terms(get_the_ID(), 'voice_category');
-
-                                                    if ($terms && !is_wp_error($terms)) {
-                                                        $category = array_shift($terms);
-                                                        echo $category->name;
-                                                    }
-                                                ?>
+                                                    $cterms = get_the_terms(get_the_ID(), $taxonomy_slug);
+                                                    if ($cterms && !is_wp_error($cterms)) :
+                                                        foreach ($cterms as $term) :
+                                                            echo esc_html($term->name);
+                                                        endforeach;
+                                                    endif;
+                                                    ?>
                                             </span>
                                         </div>
                                         <h2 class="voice-card__header-title">
@@ -85,170 +91,82 @@
                             ?>
 
                         </ul><!-- page-voice__items voice-cards -->
-                    </div>
-                    <div id="tab-panel2" class="course-tab__panel js-tab-panel" role="tabpanel" tabindex="0" aria-labelledby="tab2">
+                    </div><!-- course-tab__panel -->
+
+                    <?php foreach ($terms as $value) : ?>
+                        <?php
+                        $term_slug = $value->slug;
+                        $args = array(
+                            'post_type' => $post_type_slug,
+                            $taxonomy_slug => $term_slug,
+                            'posts_per_page' => -1,
+                            'order' => 'DESC',
+                            'orderby' => 'date',
+                            'post_status' => 'publish'
+                        );
+                        $myquery = new WP_Query($args);
+                        ?>
+
+                    <div class="course-tab__panel js-cPanel">
                         <ul class="page-voice__items voice-cards">
+                        <?php
+                            if ($myquery->have_posts()) : ?>
+                        <?php while ($myquery->have_posts()) : $myquery->the_post(); ?>
                             <li class="voice-card voice-cards__item">
                                 <div class="voice-card__header">
                                     <div class="voice-card__header-text">
                                         <div class="voice-card__header-status">
-                                            <span class="voice-card__header-demographic">
-                                            20代(女性)
+                                        <span class="voice-card__header-demographic">
+                                                <?php if( get_field('age') == "10代") : ?>10代
+                                                    <?php elseif( get_field('age') == "20代"): ?>20代
+                                                    <?php elseif( get_field('age') == "30代"): ?>30代
+                                                    <?php elseif( get_field('age') == "40代"): ?>40代
+                                                    <?php elseif( get_field('age') == "50代"): ?>50代
+                                                    <?php elseif( get_field('age') == "60代"): ?>60代
+                                                    <?php elseif( get_field('age') == "70代"): ?>70代
+                                                <?php endif; ?>
+                                                (
+                                                <?php if( get_field('sex') == "女性"): ?>女性
+                                                    <?php elseif( get_field('sex') == "男性"): ?>男性
+                                                    <?php elseif( get_field('sex') == "未選択"): ?>未選択
+                                                    <?php elseif( get_field('sex') == "カップル"): ?>カップル
+                                                    <?php elseif( get_field('sex') == "夫婦"): ?>夫婦
+                                                <?php endif; ?>
+                                                )
                                             </span>
-                                            <span class="card-tag">
-                                            ライセンス講習
-                                            </span>
-                                        </div>
-                                        <h2 class="voice-card__header-title">
-                                            ここにタイトルが入ります。ここにタイトル
-                                        </h2>
-                                    </div><!--voice-card__header-text -->
-                                    <figure class="voice-card__header-img js-scroll">
-                                        <img src="assets/images/voice/voice01.webp" alt="ライセンス講習を受けた20代女性の写真" decoding="async" loading="lazy">
-                                    </figure>
-                                </div><!--voice-card__header -->
-                                <div class="voice-card__text">
-                                    ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。<br>
-                                    ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。<br>
-                                    ここにテキストが入ります。ここにテキストが入ります。
-                                </div>
-                            </li><!-- voice-card -->
-                            <li class="voice-card voice-cards__item">
-                                <div class="voice-card__header">
-                                    <div class="voice-card__header-text">
-                                        <div class="voice-card__header-status">
-                                            <span class="voice-card__header-demographic">
-                                                20代(女性)
-                                            </span>
-                                            <span class="card-tag">
-                                                ライセンス講習
+                                            <span span class="card-tag">
+                                                <?php
+                                                    $cterms = get_the_terms(get_the_ID(), $taxonomy_slug);
+                                                    if ($cterms && !is_wp_error($cterms)) :
+                                                        foreach ($cterms as $term) :
+                                                            echo esc_html($term->name);
+                                                        endforeach;
+                                                    endif;
+                                                ?>
                                             </span>
                                         </div>
                                         <h2 class="voice-card__header-title">
-                                            ここにタイトルが入ります。ここにタイトル
+                                            <?php the_title(); ?>
                                         </h2>
                                     </div><!--voice-card__header-text -->
                                     <figure class="voice-card__header-img js-scroll">
-                                        <img src="assets/images/voice/voice06.webp" alt="ライセンス講習コースを受けた20代女性の写真" decoding="async" loading="lazy">
+                                        <?php $image = get_field('image'); if( !empty($image) ): ?>
+                                            <img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" decoding="async" loading="lazy">
+                                        <?php endif; ?>
                                     </figure>
                                 </div><!--voice-card__header -->
                                 <div class="voice-card__text">
-                                    ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。<br>
-                                    ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。<br>
-                                    ここにテキストが入ります。ここにテキストが入ります。
+                                    <?php the_content(); ?>
                                 </div>
                             </li><!-- voice-card -->
+                            <?php endwhile; ?>
+                            <?php endif; ?>
+                            <?php wp_reset_postdata(); ?>
                         </ul><!-- page-voice__items voice-cards -->
-                    </div>
-                    <div id="tab-panel3" class="course-tab__panel js-tab-panel" role="tabpanel" tabindex="0" aria-labelledby="tab3">
-                        <ul class="page-voice__items voice-cards">
-                            <li class="voice-card voice-cards__item">
-                                <div class="voice-card__header">
-                                    <div class="voice-card__header-text">
-                                        <div class="voice-card__header-status">
-                                            <span class="voice-card__header-demographic">
-                                            20代(男性)
-                                            </span>
-                                            <span class="card-tag">
-                                            ファンダイビング
-                                            </span>
-                                        </div>
-                                        <h2 class="voice-card__header-title">
-                                            ここにタイトルが入ります。ここにタイトル
-                                        </h2>
-                                    </div><!--voice-card__header-text -->
-                                    <figure class="voice-card__header-img js-scroll">
-                                        <img src="assets/images/voice/voice02.webp" alt="ファンダイビングコースを受けた20代男性の写真" decoding="async" loading="lazy">
-                                    </figure>
-                                </div><!--voice-card__header -->
-                                <div class="voice-card__text">
-                                    ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。<br>
-                                    ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。<br>
-                                    ここにテキストが入ります。ここにテキストが入ります。
-                                </div>
-                            </li><!-- voice-card -->
-                            <li class="voice-card voice-cards__item">
-                                <div class="voice-card__header">
-                                    <div class="voice-card__header-text">
-                                        <div class="voice-card__header-status">
-                                            <span class="voice-card__header-demographic">
-                                                30代(カップル)
-                                            </span>
-                                            <span class="card-tag">
-                                                ファンダイビング
-                                            </span>
-                                        </div>
-                                        <h2 class="voice-card__header-title">
-                                            ここにタイトルが入ります。ここにタイトル
-                                        </h2>
-                                    </div><!--voice-card__header-text -->
-                                    <figure class="voice-card__header-img js-scroll">
-                                        <img src="assets/images/voice/voice05.webp" alt="ファンダイビングコースを受けた30代カップルの写真" decoding="async" loading="lazy">
-                                    </figure>
-                                </div><!--voice-card__header -->
-                                <div class="voice-card__text">
-                                    ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。<br>
-                                    ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。<br>
-                                    ここにテキストが入ります。ここにテキストが入ります。
-                                </div>
-                            </li><!-- voice-card -->
-                        </ul><!-- page-voice__items voice-cards -->
-                    </div>
-                    <div id="tab-panel4" class="course-tab__panel js-tab-panel" role="tabpanel" tabindex="0" aria-labelledby="tab4">
-                        <ul class="page-voice__items voice-cards">
-                            <li class="voice-card voice-cards__item">
-                                <div class="voice-card__header">
-                                    <div class="voice-card__header-text">
-                                        <div class="voice-card__header-status">
-                                            <span class="voice-card__header-demographic">
-                                                30代(女性)
-                                            </span>
-                                            <span class="card-tag">
-                                                体験ダイビング
-                                            </span>
-                                        </div>
-                                        <h2 class="voice-card__header-title">
-                                            ここにタイトルが入ります。ここにタイトル
-                                        </h2>
-                                    </div><!--voice-card__header-text -->
-                                    <figure class="voice-card__header-img js-scroll">
-                                        <img src="assets/images/voice/voice03.webp" alt="体験ダイビングコースを受けた30代女性の写真" decoding="async" loading="lazy">
-                                    </figure>
-                                </div><!--voice-card__header -->
-                                <div class="voice-card__text">
-                                    ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。<br>
-                                    ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。<br>
-                                    ここにテキストが入ります。ここにテキストが入ります。
-                                </div>
-                            </li><!-- voice-card -->
-                            <li class="voice-card voice-cards__item">
-                                <div class="voice-card__header">
-                                    <div class="voice-card__header-text">
-                                        <div class="voice-card__header-status">
-                                            <span class="voice-card__header-demographic">
-                                                20代(女性)
-                                            </span>
-                                            <span class="card-tag">
-                                                体験ダイビング
-                                            </span>
-                                        </div>
-                                        <h2 class="voice-card__header-title">
-                                            ここにタイトルが入ります。ここにタイトル
-                                        </h2>
-                                    </div><!--voice-card__header-text -->
-                                    <figure class="voice-card__header-img js-scroll">
-                                        <img src="assets/images/voice/voice04.webp" alt="体験ダイビングコースを受けた20代女性の写真" decoding="async" loading="lazy">
-                                    </figure>
-                                </div><!--voice-card__header -->
-                                <div class="voice-card__text">
-                                    ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。<br>
-                                    ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。<br>
-                                    ここにテキストが入ります。ここにテキストが入ります。
-                                </div>
-                            </li><!-- voice-card -->
-                        </ul><!-- page-voice__items voice-cards -->
-                    </div>
-                </div><!-- course-tab -->
+                    </div><!-- course-tab__panel -->
+                    <?php endforeach; ?>
+
+                </div><!-- js-panelGroup course-tab__panel-wrap -->
 
                 <div class="campaign-content__page-nav">
                     <nav class="navigation pagination" aria-label="投稿">

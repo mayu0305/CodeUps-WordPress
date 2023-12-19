@@ -29,25 +29,8 @@
                     </div>
                     <div id="tab-panel1" class="course-tab__panel js-tab-panel -active" role="tabpanel" tabindex="0" aria-labelledby="tab1">
                         <ul class="page-voice__items voice-cards">
-                        <?php
-                            $paged = get_query_var('paged') ? get_query_var('paged') : 1;
-                            $args = [
-                                'post_type' => 'voice', // カスタム投稿の投稿タイプスラッグ
-                                'paged' => $paged, // ページネーションがある場合に必要
-                                'posts_per_page' => 6, // 表示件数
-                                // カテゴリー(ターム)を指定する場合に書く↓
-                                'tax_query' => array(
-                                        array(
-                                            'taxonomy' => 'voice_category', // タクソノミーのスラッグ
-                                            'field' => 'slug',
-                                            'terms' => array('fun', 'license', 'trial'), // タームのスラッグ（複数指定可能）
-                                        ),
-                                    ),
-                                // カテゴリー(ターム)を指定する場合に書く↑
-                            ];
-                            $wp_query = new WP_Query($args);
-                            if (have_posts()): while (have_posts()): the_post();
-                            ?>
+                        <?php if ( have_posts() ) : ?>
+                            <?php while ( have_posts() ) : the_post(); ?>
                             <li class="voice-card voice-cards__item">
                                 <div class="voice-card__header">
                                     <div class="voice-card__header-text">
@@ -89,7 +72,6 @@
                                         <?php $image = get_field('image'); if( !empty($image) ): ?>
                                             <img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" decoding="async" loading="lazy">
                                         <?php endif; ?>
-                                        <!-- <img src="assets/images/voice/voice01.webp" alt="ライセンス講習を受けた20代女性の写真" decoding="async" loading="lazy"> -->
                                     </figure>
                                 </div><!--voice-card__header -->
                                 <div class="voice-card__text">
@@ -97,9 +79,10 @@
                                 </div>
                             </li><!-- voice-card -->
 
-                            <?php endwhile; else: ?>
-                            <?php endif ?>
-                            <?php wp_reset_postdata(); ?>
+                            <?php
+                                endwhile;
+                                endif;
+                            ?>
 
                         </ul><!-- page-voice__items voice-cards -->
                     </div>
@@ -267,7 +250,7 @@
                     </div>
                 </div><!-- course-tab -->
 
-                <div class="campaign-content__page-nav">
+                <!-- <div class="campaign-content__page-nav">
                     <nav class="navigation pagination" aria-label="投稿">
                         <h2 class="screen-reader-text visually-hidden">投稿ナビゲーション</h2>
                         <div class="pagination__links">
@@ -279,6 +262,15 @@
                             <a class="page-numbers page-numbers--pc-only" href="">5</a>
                             <a class="page-numbers page-numbers--pc-only" href="">6</a>
                             <a class="next page-numbers" href=""></a>
+                        </div>
+                    </nav>
+                </div> -->
+
+                <div class="campaign-content__page-nav">
+                    <nav class="navigation pagination" aria-label="投稿">
+                        <h2 class="screen-reader-text visually-hidden">投稿ナビゲーション</h2>
+                        <div class="pagination__links">
+                            <?php wp_pagenavi(); ?>
                         </div>
                     </nav>
                 </div>

@@ -121,6 +121,20 @@ jQuery(function ($) {
       }
     });
   });
+
+
+
+  //キャンペーンタブテスト
+  $(function(){
+    $('.js-cTab').on('click',function(){
+    var idx=$('.js-cTab').index(this);
+    $(this).addClass('is-active').siblings('.js-cTab').removeClass('is-active');
+    $(this).closest('.js-tabGroup').nextAll('.js-panelGroup').find('.js-cPanel').removeClass('is-active');
+    $('.js-cPanel').eq(idx).addClass('is-active');
+    });
+  });
+
+
 }); //jQueryここまで
 
 //mvスライダー
@@ -337,3 +351,4 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 });
+

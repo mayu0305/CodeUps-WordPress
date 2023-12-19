@@ -45,6 +45,7 @@ function my_setup(){
 add_action('after_setup_theme', 'my_setup');
 
 
+//ブログの人気記事
 function update_custom_meta_views()
 {
   global $post;
@@ -87,4 +88,59 @@ function custom_orderby_custom_meta_views($vars)
   return $vars;
 }
 add_filter('request', 'custom_orderby_custom_meta_views');
+
+
+// カスタム投稿タイプ 'blog' の月別アーカイブを有効にする
+add_filter('pre_get_posts', 'custom_post_type_archive');
+
+function custom_post_type_archive($query) {
+    if ($query->is_main_query() && is_post_type_archive('blog') && !is_admin()) {
+        $query->set('posts_per_page', -1);
+    }
+}
+
+//管理画面のメニュー「投稿」→「ブログ」に変更
+function change_post_menu_label() {
+    global $menu;
+    global $submenu;
+    $menu[5][0] = 'ブログ';
+    $submenu['edit.php'][5][0] = 'ブログ一覧';
+    $submenu['edit.php'][10][0] = '新規追加';
+    echo '';
+}
+function change_post_object_label() {
+    global $wp_post_types;
+    $labels = &$wp_post_types['post']->labels;
+    $labels->name = 'ブログ';
+    $labels->singular_name = 'ブログ';
+    $labels->add_new = _x('追加', 'ブログ');
+    $labels->add_new_item = '新規ブログの追加';
+    $labels->edit_item = 'ブログの編集';
+    $labels->new_item = '新しいブログ';
+    $labels->view_item = 'ブログを表示';
+    $labels->search_items = 'ブログを検索';
+    $labels->not_found = 'ブログはありません';
+    $labels->not_found_in_trash = 'ゴミ箱にブログはありません';
+}
+add_action('init', 'change_post_object_label');
+add_action('admin_menu', 'change_post_menu_label');
+
+
+//アーカイブの表示件数変更
+function change_posts_per_page($query) {
+    if (is_admin() || ! $query->is_main_query()) {
+        return;
+    }
+
+    if ($query->is_archive() && $query->get('post_type') == 'voice') {
+        $query->set('posts_per_page', 6);
+    } elseif ($query->is_archive() && $query->get('post_type') == 'campaign') {
+        $query->set('posts_per_page', 4);
+    }
+}
+
+add_action('pre_get_posts', 'change_posts_per_page');
+
+
+
 

@@ -29,25 +29,8 @@
                     </div>
                     <div id="tab-panel1" class="course-tab__panel course-tab__panel--campaign js-tab-panel -active" role="tabpanel" tabindex="0" aria-labelledby="tab1">
                         <div class="campaign-cards">
-                            <?php
-                                $paged = get_query_var('paged') ? get_query_var('paged') : 1;
-                                $args = [
-                                    'post_type' => 'campaign', // カスタム投稿の投稿タイプスラッグ
-                                    'paged' => $paged, // ページネーションがある場合に必要
-                                    'posts_per_page' => 4, // 表示件数
-                                    // カテゴリー(ターム)を指定する場合に書く↓
-                                    'tax_query' => array(
-                                            array(
-                                                'taxonomy' => 'campaign_category', // タクソノミーのスラッグ
-                                                'field' => 'slug',
-                                                'terms' => array('fun', 'license', 'trial'), // タームのスラッグ（複数指定可能）
-                                            ),
-                                        ),
-                                    // カテゴリー(ターム)を指定する場合に書く↑
-                                ];
-                                $wp_query = new WP_Query($args);
-                                if (have_posts()): while (have_posts()): the_post();
-                                ?>
+                        <?php if ( have_posts() ) : ?>
+                            <?php while ( have_posts() ) : the_post(); ?>
 
                                 <div class="campaign-card campaign-cards__item">
                                     <div class="campaign-card__content campaign-card__content--page">
@@ -73,9 +56,9 @@
                                             <span class="campaign-card__content-price-regular">¥<?php the_field('list-price'); ?></span>
                                             <span class="campaign-card__content-price-sale campaign-card__content-price-sale--page">¥<?php the_field('campaign-price'); ?></span>
                                         </div>
-                                        <p class="campaign-card__description u-desktop ">
+                                        <div class="campaign-card__description u-desktop ">
                                             <?php the_content(); ?>
-                                        </p>
+                                        </div>
                                         <div class="campaign-card__info u-desktop ">
                                             <span class="campaign-card__info-period">
                                             <?php the_field('period'); ?>
@@ -99,9 +82,10 @@
                                     </figure>
                                 </div><!-- campaign-card-->
 
-                            <?php endwhile; else: ?>
-                            <?php endif ?>
-                            <?php wp_reset_postdata(); ?>
+                                <?php
+                                    endwhile;
+                                    endif;
+                                ?>
 
                         </div><!-- campaign-cards -->
                     </div>
@@ -246,14 +230,7 @@
                     <nav class="navigation pagination" aria-label="投稿">
                         <h2 class="screen-reader-text visually-hidden">投稿ナビゲーション</h2>
                         <div class="pagination__links">
-                            <a class="prev page-numbers" href=""></a>
-                            <span aria-current="page" class="page-numbers current">1</span>
-                            <a class="page-numbers" href="">2</a>
-                            <a class="page-numbers" href="">3</a>
-                            <a class="page-numbers" href="">4</a>
-                            <a class="page-numbers page-numbers--pc-only" href="">5</a>
-                            <a class="page-numbers page-numbers--pc-only" href="">6</a>
-                            <a class="next page-numbers" href=""></a>
+                            <?php wp_pagenavi(); ?>
                         </div>
                     </nav>
                 </div>

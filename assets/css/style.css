@@ -2286,7 +2286,7 @@ textarea:focus {
 	transition: 0.3s;
 }
 
-.nav-menu__item--sitemap a {
+.nav-menu__item--sitemap a:not(.header__nav-sp a,.footer a) {
 	color: #0D2936;
 }
 
@@ -2301,7 +2301,7 @@ textarea:focus {
 	width: 1.125rem;
 }
 
-.nav-menu__item--sitemap > a::before {
+.nav-menu__item--sitemap > a::before:not(.header__nav-sp .nav-menu__item--sitemap > a::before) {
 	background-image: url(../images/common/icon-starfish--black.svg);
 }
 

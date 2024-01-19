@@ -601,6 +601,16 @@ a {
 	position: relative;
 }
 
+.contact__form .wpcf7-list-item{
+	display: block;
+	margin: 0;
+}
+
+.contact__form .wpcf7-not-valid:not(.wpcf7-checkbox){
+	background-color: rgba(201, 72, 0, 0.2) !important;
+    border: 1px solid #C94800 !important;
+}
+
 .contact__form-items > * + * {
 	padding-top: 1.4375rem;
 }
@@ -654,6 +664,25 @@ a {
 	color: #DDF0F1;
 }
 
+.contact__form .wpcf7-not-valid::-moz-placeholder{
+	color: #fff;
+}
+
+.contact__form .wpcf7-not-valid::placeholder{
+	color: #fff;
+}
+
+.contact__form .wpcf7-not-valid-tip{
+	font-size: 0.875rem;
+	position: absolute;
+    top: -5.3vw;
+    margin-left: -2.5em;
+}
+
+.contact__form  .wpcf7-form-control-wrap {
+    position: static;
+}
+
 .contact__form-item-desc label {
 	display: block;
 	margin-top: 0.0625rem;
@@ -664,7 +693,41 @@ a {
 	height: 12.5rem;
 }
 
-.contact__form [type=text],
+.contact__form-item-desc--campaign{
+	position: relative;
+}
+
+.contact__form-item-desc--campaign span{
+	position: absolute !important;
+	width: 100%;
+	left: 0;
+}
+
+.contact__form-item--campaign{
+	padding-bottom: 2.8em;
+}
+
+@media screen and (min-width: 768px) {
+	.contact__form-item-desc--campaign select{
+		margin-top: -2.2em !important;
+	}
+
+	.contact__form-item-desc--textarea span{
+		margin-top: -1.5em;
+	}
+
+	.contact__form-item-desc--campaign span {
+		position: static !important;
+	}
+}
+
+
+
+/* .wpcf7 form .wpcf7-response-output{
+	display: none;
+} */
+
+[type=text],
 [type=tel],
 [type=email],
 textarea {

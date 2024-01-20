@@ -148,7 +148,7 @@ function wpcf7_autop_return_false() {
   return false;
 }
 
-
+//コンタクトフォームにキャンペーンページで使用したタイトルを挿入する
 function dynamic_field_values ( $tag, $unused ) {
     if ( $tag['name'] != 'your-form-tag-name' )  // Contact Form 7内に記入するフィールド名（独自のフォームタグ名）
         return $tag;
@@ -171,7 +171,17 @@ function dynamic_field_values ( $tag, $unused ) {
 add_filter( 'wpcf7_form_tag', 'dynamic_field_values', 30, 2);
 
 
+/* 管理画面での表示項目追加 */
+function add_custom_column( $defaults ) {
+  $defaults['cf_column'] = 'fv-images'; //項目名
+  return $defaults;
+}
+add_filter('manage_fv-images_posts_columns', 'add_custom_column');
 
-
-
-
+function add_custom_column_id($column_name, $id) {
+  if ($column_name == 'cf_column') {
+  $cf_column = get_field('cf_column', $id);
+  echo $cf_column;
+  }
+}
+add_action('manage_fv-images_posts_custom_column', 'add_custom_column_id', 10, 2);

@@ -31,7 +31,7 @@
                 ご予約・お問い合わせはコチラ
                 </p>
                 <div class="contact-link__link">
-                    <a class="link-button" href="">
+                    <a class="link-button" href="/contact/">
                     <span class="link-button__text">Contact us</span>
                     <span class="link-button__arrow">
                     </span>

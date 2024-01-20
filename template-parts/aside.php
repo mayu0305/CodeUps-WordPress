@@ -26,7 +26,7 @@
                     <?php if ( has_post_thumbnail() ) : ?>
                         <?php the_post_thumbnail('full'); ?>
                         <?php else : ?>
-                            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/blog/noimage.webp" alt="デフォルト画像">
+                            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/blog/noimage.webp" alt="デフォルト画像" decoding="async" loading="lazy">
                     <?php endif ; ?>
                 </figure>
             </a>

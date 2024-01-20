@@ -6,26 +6,26 @@
         <ul class="swiper-wrapper">
             <li class="swiper-slide fv__img">
               <picture>
-                <source media="(min-width: 768px)" srcset="<?php echo get_theme_file_uri(); ?>/assets/images/index/fv01_pc.webp">
-                <img src="<?php echo get_theme_file_uri(); ?>/assets/images/index/fv01_sp.webp" alt="トップイメージ画像" decoding="async">
+                <source media="(min-width: 768px)" srcset="<?php echo get_field('fv-image_pc01')['url']; ?>">
+                <img src="<?php echo get_field('fv-image_sp01')['url']; ?>" alt="<?php echo get_field('fv-image_sp01')['alt']; ?>" decoding="async">
               </picture>
             </li>
             <li class="swiper-slide fv__img">
               <picture>
-                <source media="(min-width: 768px)" srcset="<?php echo get_theme_file_uri(); ?>/assets/images/index/fv02_pc.webp">
-                <img src="<?php echo get_theme_file_uri(); ?>/assets/images/index/fv02_sp.webp" alt="トップイメージ画像" decoding="async">
+                <source media="(min-width: 768px)" srcset="<?php echo get_field('fv-image_pc02')['url']; ?>">
+                <img src="<?php echo get_field('fv-image_sp02')['url']; ?>" alt="<?php echo get_field('fv-image_sp02')['alt']; ?>" decoding="async">
               </picture>
             </li>
             <li class="swiper-slide fv__img">
               <picture>
-                <source media="(min-width: 768px)" srcset="<?php echo get_theme_file_uri(); ?>/assets/images/index/fv03_pc.webp">
-                <img src="<?php echo get_theme_file_uri(); ?>/assets/images/index/fv03_sp.webp" alt="トップイメージ画像" decoding="async">
+                <source media="(min-width: 768px)" srcset="<?php echo get_field('fv-image_pc03')['url']; ?>">
+                <img src="<?php echo get_field('fv-image_sp03')['url']; ?>" alt="<?php echo get_field('fv-image_sp03')['alt']; ?>" decoding="async">
               </picture>
             </li>
             <li class="swiper-slide fv__img">
               <picture>
-                <source media="(min-width: 768px)" srcset="<?php echo get_theme_file_uri(); ?>/assets/images/index/fv04_pc.webp">
-                <img src="<?php echo get_theme_file_uri(); ?>/assets/images/index/fv04_sp.webp" alt="トップイメージ画像" decoding="async">
+                <source media="(min-width: 768px)" srcset="<?php echo get_field('fv-image_pc04')['url']; ?>">
+                <img src="<?php echo get_field('fv-image_sp04')['url']; ?>" alt="<?php echo get_field('fv-image_sp04')['alt']; ?>" decoding="async">
               </picture>
             </li>
         </ul>
@@ -46,15 +46,35 @@
           <div class="top-campaign__contents">
             <div class="top-campaign__slider js-campaign-swiper">
               <ul class="swiper-wrapper top-campaign__items">
+                <?php
+                  $args = array(
+                      'post_type' => 'campaign',
+                      'post_status' => 'publish',
+                      'order' => 'DESC'
+                  );
+                  $the_query = new WP_Query($args);
+                  $taxonomy_slug = 'campaign_category';
+                  $post_type_slug = 'campaign';
+                  $terms = get_terms($taxonomy_slug);
+                  if ($the_query->have_posts()) :
+                  while ($the_query->have_posts()) : $the_query->the_post();  ?>
+
                   <li class="swiper-slide  top-campaign__item">
                     <div class="campaign-card">
                       <div class="campaign-card__content">
                         <div class="campaign-card__content-header">
                           <span class="card-tag">
-                            ライセンス講習
+                          <?php
+                              $cterms = get_the_terms(get_the_ID(), $taxonomy_slug);
+                              if ($cterms && !is_wp_error($cterms)) :
+                                  foreach ($cterms as $term) :
+                                      echo esc_html($term->name);
+                                  endforeach;
+                              endif;
+                              ?>
                           </span>
                           <h3 class="campaign-card__content-title">
-                            ライセンス取得
+                            <?php the_title(); ?>
                           </h3>
                         </div>
                         <div class="campaign-card__content-body">
@@ -62,94 +82,23 @@
                             全部コミコミ(お一人様)
                           </span>
                           <div class="campaign-card__content-price">
-                            <span class="campaign-card__content-price-regular">¥56,000</span>
-                            <span class="campaign-card__content-price-sale">¥46,000</span>
+                            <span class="campaign-card__content-price-regular">¥<?php the_field('list-price'); ?></span>
+                            <span class="campaign-card__content-price-sale">¥<?php the_field('campaign-price'); ?></span>
                           </div>
                         </div>
                       </div><!-- campaign-card__content-->
                       <figure class="campaign-card__img">
-                        <img src="<?php echo get_theme_file_uri(); ?>/assets/images/campaign/campaign01.webp" alt="海中を泳ぐ沢山の熱帯魚の写真" decoding="async" loading="lazy">
+                        <?php $image = get_field('image'); if( !empty($image) ): ?>
+                            <img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" decoding="async" loading="lazy">
+                        <?php endif; ?>
                       </figure>
                     </div><!-- campaign-card-->
                   </li>
-                  <li class="swiper-slide  top-campaign__item">
-                    <div class="campaign-card">
-                      <div class="campaign-card__content">
-                        <div class="campaign-card__content-header">
-                          <span class="card-tag">
-                            体験ダイビング
-                          </span>
-                          <h3 class="campaign-card__content-title">
-                            貸切体験ダイビング
-                          </h3>
-                        </div>
-                        <div class="campaign-card__content-body">
-                          <span class="campaign-card__content-desc">
-                            全部コミコミ(お一人様)
-                          </span>
-                          <div class="campaign-card__content-price campaign-price">
-                            <span class="campaign-card__content-price-regular">¥24,000</span>
-                            <span class="campaign-card__content-price-sale">¥18,000</span>
-                          </div>
-                        </div>
-                      </div><!-- campaign-card__content-->
-                      <figure class="campaign-card__img">
-                        <img src="<?php echo get_theme_file_uri(); ?>/assets/images/campaign/campaign02.webp" alt="海上に浮かぶ船の写真" decoding="async" loading="lazy">
-                      </figure>
-                    </div><!-- campaign-card-->
-                  </li>
-                  <li class="swiper-slide  top-campaign__item">
-                    <div class="campaign-card">
-                      <div class="campaign-card__content">
-                        <div class="campaign-card__content-header">
-                          <span class="card-tag">
-                            体験ダイビング
-                          </span>
-                          <h3 class="campaign-card__content-title">
-                            ナイトダイビング
-                          </h3>
-                        </div>
-                        <div class="campaign-card__content-body">
-                          <span class="campaign-card__content-desc">
-                            全部コミコミ(お一人様)
-                          </span>
-                          <div class="campaign-card__content-price campaign-price">
-                            <span class="campaign-card__content-price-regular">¥10,000</span>
-                            <span class="campaign-card__content-price-sale">¥8,000</span>
-                          </div>
-                        </div>
-                      </div><!-- campaign-card__content-->
-                      <figure class="campaign-card__img">
-                        <img src="<?php echo get_theme_file_uri(); ?>/assets/images/campaign/campaign03.webp" alt="夜の海中を漂うクラゲの写真" decoding="async" loading="lazy">
-                      </figure>
-                    </div><!-- campaign-card-->
-                  </li>
-                  <li class="swiper-slide  top-campaign__item">
-                    <div class="campaign-card">
-                      <div class="campaign-card__content">
-                        <div class="campaign-card__content-header">
-                          <span class="card-tag">
-                            ファンダイビング
-                          </span>
-                          <h3 class="campaign-card__content-title">
-                            貸切ファンダイビング
-                          </h3>
-                        </div>
-                        <div class="campaign-card__content-body">
-                          <span class="campaign-card__content-desc">
-                            全部コミコミ(お一人様)
-                          </span>
-                          <div class="campaign-card__content-price campaign-price">
-                            <span class="campaign-card__content-price-regular">¥20,000</span>
-                            <span class="campaign-card__content-price-sale">¥16,000</span>
-                          </div>
-                        </div>
-                      </div><!-- campaign-card__content-->
-                      <figure class="campaign-card__img">
-                        <img src="<?php echo get_theme_file_uri(); ?>/assets/images/campaign/campaign04.webp" alt="ダイビングの講習を受けている写真" decoding="async" loading="lazy">
-                      </figure>
-                    </div><!-- campaign-card-->
-                  </li>
+                <?php
+                  endwhile;
+                  endif;
+                  wp_reset_postdata();
+                ?>
                 </ul>
             </div><!-- top-campaign__slider -->
             <div class="top-campaign__button u-desktop">
@@ -242,57 +191,47 @@
           <h2 class="section-title__main">ブログ</h2>
         </div>
         <article class="top-blog__items blog-cards">
-          <a href="" class="blog-cards__item blog-card">
-            <div class="blog-card__content">
-              <time class="blog-card__content-date" datetime="2023-11-17">
-                2023.11/17
-              </time>
-              <h3 class="blog-card__content-title">
-                ライセンス取得
-              </h3>
-              <p class="blog-card__content-text">
-                ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。<br>
-                ここにテキストが入ります。ここにテキストが入ります。ここにテキスト
-              </p>
-            </div><!-- blog-card__content -->
-            <figure class="blog-card__img">
-              <img src="<?php echo get_theme_file_uri(); ?>/assets/images/blog/blog-post01.webp" alt="サンゴの写真" decoding="async" loading="lazy">
-            </figure>
-          </a><!-- blog-card -->
-          <a href="" class="blog-cards__item blog-card">
-            <div class="blog-card__content">
-              <time class="blog-card__content-date" datetime="2023-11-17">
-                2023.11/17
-              </time>
-              <h3 class="blog-card__content-title">
-                ウミガメと泳ぐ
-              </h3>
-              <p class="blog-card__content-text">
-                ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。<br>
-                ここにテキストが入ります。ここにテキストが入ります。ここにテキスト
-              </p>
-            </div><!-- blog-card__content -->
-            <figure class="blog-card__img">
-              <img src="<?php echo get_theme_file_uri(); ?>/assets/images/blog/blog-post02.webp" alt="ウミガメの写真" decoding="async" loading="lazy">
-            </figure>
-          </a><!-- blog-card -->
-          <a href="" class="blog-cards__item blog-card">
-            <div class="blog-card__content">
-              <time class="blog-card__content-date" datetime="2023-11-17">
-                2023.11/17
-              </time>
-              <h3 class="blog-card__content-title">
-                カクレクマノミ
-              </h3>
-              <p class="blog-card__content-text">
-                ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。<br>
-                ここにテキストが入ります。ここにテキストが入ります。ここにテキスト
-              </p>
-            </div><!-- blog-card__content -->
-            <figure class="blog-card__img">
-              <img src="<?php echo get_theme_file_uri(); ?>/assets/images/blog/blog-post03.webp" alt="カクレクマノミの写真" decoding="async" loading="lazy">
-            </figure>
-          </a><!-- blog-card -->
+          <?php
+              $args = array(
+                  'post_type' => 'post',
+                  'post_status' => 'publish',
+                  'posts_per_page' => 3,
+                  'order' => 'DESC'
+              );
+              $the_query = new WP_Query($args);
+              if ($the_query->have_posts()) :
+              while ($the_query->have_posts()) : $the_query->the_post();  ?>
+
+              <a href="<?php the_permalink(); ?>" class="blog-cards__item blog-card">
+                <div class="blog-card__content">
+                  <time class="blog-card__content-date" datetime="<?php the_time('Y-m-d'); ?>">
+                    <?php the_time( get_option( 'date_format' ) ); ?>
+                  </time>
+                  <h3 class="blog-card__content-title">
+                    <?php the_title(); ?>
+                  </h3>
+                  <p class="blog-card__content-text">
+                    <?php
+                        $content = get_the_content();
+                        $content = wp_strip_all_tags( $content );
+                        $content = strip_shortcodes( $content );
+                        echo $content;
+                    ?>
+                  </p>
+                </div><!-- blog-card__content -->
+                <figure class="blog-card__img">
+                  <?php if ( has_post_thumbnail() ) : ?>
+                      <?php the_post_thumbnail('full'); ?>
+                      <?php else : ?>
+                          <img src="<?php echo get_template_directory_uri(); ?>/assets/images/blog/noimage.webp" alt="デフォルト画像" decoding="async" loading="lazy">
+                  <?php endif ; ?>
+                </figure>
+              </a><!-- blog-card -->
+          <?php
+              endwhile;
+              endif;
+              wp_reset_postdata();
+          ?>
         </article><!-- top-blog__items -->
 
         <div class="top-blog__link">
@@ -312,56 +251,73 @@
           <h2 class="section-title__main">お客様の声</h2>
         </div>
         <ul class="top-voice__items voice-cards">
-          <li class="voice-cards__item voice-card">
-            <div class="voice-card__header">
-              <div class="voice-card__header-text">
-                <div class="voice-card__header-status">
-                  <span class="voice-card__header-demographic">
-                    20代(女性)
-                  </span>
-                  <span class="card-tag">
-                    ライセンス講習
-                  </span>
-                </div>
-                <h3 class="voice-card__header-title">
-                  ここにタイトルが入ります。ここにタイトル
-                </h3>
-              </div><!--voice-card__header-text -->
-              <figure class="voice-card__header-img js-scroll">
-                <img src="<?php echo get_theme_file_uri(); ?>/assets/images/voice/voice01.webp" alt="ライセンス講習を受けた20代女性の写真" decoding="async" loading="lazy">
-              </figure>
-            </div><!--voice-card__header -->
-            <div class="voice-card__text">
-              ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。<br>
-              ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。<br>
-              ここにテキストが入ります。ここにテキストが入ります。
-            </div>
-          </li><!-- voice-card -->
-          <li class="voice-card voice-cards__item">
-            <div class="voice-card__header">
-              <div class="voice-card__header-text">
-                <div class="voice-card__header-status">
-                  <span class="voice-card__header-demographic">
-                    20代(男性)
-                  </span>
-                  <span class="card-tag">
-                    ファンダイビング
-                  </span>
-                </div>
-                <h3 class="voice-card__header-title">
-                  ここにタイトルが入ります。ここにタイトル
-                </h3>
-              </div><!--voice-card__header-text -->
-              <figure class="voice-card__header-img js-scroll">
-                <img src="<?php echo get_theme_file_uri(); ?>/assets/images/voice/voice02.webp" alt="ファンダイビングコースを受けた20代男性の写真" decoding="async" loading="lazy">
-              </figure>
-            </div><!--voice-card__header -->
-            <div class="voice-card__text">
-              ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。<br>
-              ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。<br>
-              ここにテキストが入ります。ここにテキストが入ります。
-            </div>
-          </li><!-- voice-card -->
+          <?php
+            $args = array(
+                'post_type' => 'voice',
+                'post_status' => 'publish',
+                'posts_per_page' => 2,
+                'order' => 'DESC'
+            );
+            $the_query = new WP_Query($args);
+            $taxonomy_slug = 'voice_category';
+            $post_type_slug = 'voice';
+            $terms = get_terms($taxonomy_slug);
+            if ($the_query->have_posts()) :
+            while ($the_query->have_posts()) : $the_query->the_post();  ?>
+
+            <li class="voice-cards__item voice-card">
+              <div class="voice-card__header">
+                <div class="voice-card__header-text">
+                  <div class="voice-card__header-status">
+                    <span class="voice-card__header-demographic">
+                    <?php if( get_field('age') == "10代") : ?>10代
+                          <?php elseif( get_field('age') == "20代"): ?>20代
+                          <?php elseif( get_field('age') == "30代"): ?>30代
+                          <?php elseif( get_field('age') == "40代"): ?>40代
+                          <?php elseif( get_field('age') == "50代"): ?>50代
+                          <?php elseif( get_field('age') == "60代"): ?>60代
+                          <?php elseif( get_field('age') == "70代"): ?>70代
+                      <?php endif; ?>
+                      (
+                      <?php if( get_field('sex') == "女性"): ?>女性
+                          <?php elseif( get_field('sex') == "男性"): ?>男性
+                          <?php elseif( get_field('sex') == "未選択"): ?>未選択
+                          <?php elseif( get_field('sex') == "カップル"): ?>カップル
+                          <?php elseif( get_field('sex') == "夫婦"): ?>夫婦
+                      <?php endif; ?>
+                      )
+                    </span>
+                    <span class="card-tag">
+                    <?php
+                        $cterms = get_the_terms(get_the_ID(), $taxonomy_slug);
+                        if ($cterms && !is_wp_error($cterms)) :
+                            foreach ($cterms as $term) :
+                                echo esc_html($term->name);
+                            endforeach;
+                        endif;
+                        ?>
+                    </span>
+                  </div>
+                  <h3 class="voice-card__header-title">
+                    <?php the_title(); ?>
+                  </h3>
+                </div><!--voice-card__header-text -->
+                <figure class="voice-card__header-img js-scroll">
+                  <?php $image = get_field('image'); if( !empty($image) ): ?>
+                      <img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" decoding="async" loading="lazy">
+                  <?php endif; ?>
+                </figure>
+              </div><!--voice-card__header -->
+              <div class="voice-card__text">
+                <?php the_content(); ?>
+              </div>
+            </li><!-- voice-card -->
+          <?php
+            endwhile;
+            endif;
+            wp_reset_postdata();
+          ?>
+
         </ul><!-- top-voice__items -->
         <div class="top-voice__link">
           <a class="link-button" href="">
@@ -386,18 +342,19 @@
                 ライセンス講習
               </h3>
               <dl class="top-price-list__items">
-                <div class="top-price-list__item">
-                  <dt class="top-price-list__item-term">オープンウォーターダイバーコース</dt>
-                  <dd class="top-price-list__item-desc">¥50,000</dd>
-                </div>
-                <div class="top-price-list__item">
-                  <dt class="top-price-list__item-term">アドバンスドオープンウォーターコース</dt>
-                  <dd class="top-price-list__item-desc">¥60,000</dd>
-                </div>
-                <div class="top-price-list__item">
-                  <dt class="top-price-list__item-term">レスキュー＋EFRコース</dt>
-                  <dd class="top-price-list__item-desc">¥70,000</dd>
-                </div>
+                <?php
+                  $link_group = SCF::get('license', 38);
+                  foreach ($link_group as $fields ) {
+                ?>
+                  <div class="top-price-list__item">
+                    <dt class="top-price-list__item-term">
+                      <?php echo $fields['license-course']; ?>
+                    </dt>
+                    <dd class="top-price-list__item-desc">
+                      <?php echo $fields['license-price']; ?>
+                    </dd>
+                  </div>
+                <?php } ?>
               </dl>
             </li>
             <li class="top-price-list">
@@ -405,22 +362,19 @@
                 体験ダイビング
               </h3>
               <dl class="top-price-list__items">
-                <div class="top-price-list__item">
-                  <dt class="top-price-list__item-term">ビーチ体験ダイビング(半日)</dt>
-                  <dd class="top-price-list__item-desc">¥7,000</dd>
-                </div>
-                <div class="top-price-list__item">
-                  <dt class="top-price-list__item-term">ビーチ体験ダイビング(1日)</dt>
-                  <dd class="top-price-list__item-desc">¥14,000</dd>
-                </div>
-                <div class="top-price-list__item">
-                  <dt class="top-price-list__item-term">ボート体験ダイビング(半日)</dt>
-                  <dd class="top-price-list__item-desc">¥10,000</dd>
-                </div>
-                <div class="top-price-list__item">
-                  <dt class="top-price-list__item-term">ボート体験ダイビング(1日)</dt>
-                  <dd class="top-price-list__item-desc">¥18,000</dd>
-                </div>
+                <?php
+                    $link_group = SCF::get('trial', 38);
+                    foreach ($link_group as $fields ) {
+                  ?>
+                    <div class="top-price-list__item">
+                      <dt class="top-price-list__item-term">
+                        <?php echo $fields['trial-course']; ?>
+                      </dt>
+                      <dd class="top-price-list__item-desc">
+                        <?php echo $fields['trial-price']; ?>
+                      </dd>
+                    </div>
+                  <?php } ?>
               </dl>
             </li>
             <li class="top-price-list">
@@ -428,22 +382,19 @@
                 ファンダイビング
               </h3>
               <dl class="top-price-list__items">
-                <div class="top-price-list__item">
-                  <dt class="top-price-list__item-term">ビーチダイビング(2ダイブ)</dt>
-                  <dd class="top-price-list__item-desc">¥14,000</dd>
-                </div>
-                <div class="top-price-list__item">
-                  <dt class="top-price-list__item-term">ボートダイビング(2ダイブ)</dt>
-                  <dd class="top-price-list__item-desc">¥18,000</dd>
-                </div>
-                <div class="top-price-list__item">
-                  <dt class="top-price-list__item-term">スペシャルダイビング(2ダイブ)</dt>
-                  <dd class="top-price-list__item-desc">¥24,000</dd>
-                </div>
-                <div class="top-price-list__item">
-                  <dt class="top-price-list__item-term">ナイトダイビング(1ダイブ)</dt>
-                  <dd class="top-price-list__item-desc">¥10,000</dd>
-                </div>
+                <?php
+                    $link_group = SCF::get('fun', 38);
+                    foreach ($link_group as $fields ) {
+                  ?>
+                    <div class="top-price-list__item">
+                      <dt class="top-price-list__item-term">
+                        <?php echo $fields['fun-course']; ?>
+                      </dt>
+                      <dd class="top-price-list__item-desc">
+                        <?php echo $fields['fun-price']; ?>
+                      </dd>
+                    </div>
+                  <?php } ?>
               </dl>
             </li>
             <li class="top-price-list">
@@ -451,14 +402,19 @@
                 スペシャルダイビング
               </h3>
               <dl class="top-price-list__items">
-                <div class="top-price-list__item">
-                  <dt class="top-price-list__item-term">貸切ダイビング(2ダイブ)</dt>
-                  <dd class="top-price-list__item-desc">¥24,000</dd>
-                </div>
-                <div class="top-price-list__item">
-                  <dt class="top-price-list__item-term">1日ダイビング(3ダイブ)</dt>
-                  <dd class="top-price-list__item-desc">¥32,000</dd>
-                </div>
+                <?php
+                    $link_group = SCF::get('special', 38);
+                    foreach ($link_group as $fields ) {
+                  ?>
+                    <div class="top-price-list__item">
+                      <dt class="top-price-list__item-term">
+                        <?php echo $fields['special-course']; ?>
+                      </dt>
+                      <dd class="top-price-list__item-desc">
+                        <?php echo $fields['special-price']; ?>
+                      </dd>
+                    </div>
+                  <?php } ?>
               </dl>
             </li>
           </ul>

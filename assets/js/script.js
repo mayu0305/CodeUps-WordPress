@@ -135,6 +135,26 @@ jQuery(function ($) {
   });
 
 
+    // コンタクトフォームでページが読み込まれた時点で実行される関数
+    // ページが読み込まれた時点で実行される関数
+    $(document).ready(function() {
+      // .link-button__text--send クラスの要素を取得
+      var linkButton = $('.link-button__text--send');
+
+      // disabled 属性があるかチェック
+      if (linkButton.prop('disabled')) {
+        // link-button-disabled クラスを付与
+        linkButton.closest('.link-button').addClass('link-button-disabled');
+      }
+    });
+
+    // input.acceptance-check をクリックしたときに実行される関数
+    $(document).on('click', 'input.acceptance-check', function() {
+      // .link-button-disabled クラスをトグル
+      $('.link-button').toggleClass('link-button-disabled');
+    });
+
+
 }); //jQueryここまで
 
 //mvスライダー

@@ -2221,8 +2221,8 @@ textarea:focus {
 	z-index: -1;
 }
 
-.link-button:hover::after,
-.link-button:focus::after {
+.link-button:not(.link-button.link-button-disabled):hover::after,
+.link-button:not(.link-button.link-button-disabled):focus::after {
 	transform: scale(1, 1);
 }
 
@@ -2231,6 +2231,12 @@ textarea:focus {
 	color: #408F95;
 	transition: 0.3s;
 }
+
+/* .link-button:not(.link-button.link-button-disabled):hover,
+.link-button:not(.link-button.link-button-disabled):focus{
+	color: #408F95;
+	transition: 0.3s;
+} */
 
 .link-button--404 {
 	background-color: #fff;
@@ -2299,7 +2305,7 @@ textarea:focus {
 	transform: translateY(-50%);
 }
 
-.link-button:hover .link-button__arrow::before {
+.link-button:hover:not(.link-button.link-button-disabled) .link-button__arrow::before {
 	background-color: #408F95;
 }
 
@@ -2307,7 +2313,7 @@ textarea:focus {
 	background-color: #fff;
 }
 
-.link-button:hover .link-button__text--send {
+.link-button:hover .link-button__text--send:not(:disabled) {
 	color: #408F95;
 }
 

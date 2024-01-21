@@ -95,7 +95,7 @@
             ?>
         </ul>
         <div class="aside__content-link">
-            <a class="link-button" href="/voice/">
+            <a class="link-button" href="<?php echo esc_url(home_url()); ?>/voice/">
                 <span class="link-button__text">View more</span>
                 <span class="link-button__arrow">
                 </span>
@@ -154,7 +154,7 @@
             ?>
         </ul><!-- aside-campaign__items -->
         <div class="aside__content-link">
-            <a class="link-button" href="/campaign/">
+            <a class="link-button" href="<?php echo esc_url(home_url()); ?>/campaign/">
                 <span class="link-button__text">View more</span>
                 <span class="link-button__arrow">
                 </span>

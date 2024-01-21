@@ -81,7 +81,12 @@
                                     </figure>
                                 </div><!--voice-card__header -->
                                 <div class="voice-card__text">
-                                    <?php the_content(); ?>
+                                    <?php
+										$content = get_the_content();
+										$content = wp_strip_all_tags( $content );
+										$content = strip_shortcodes( $content );
+										echo $content;
+									?>
                                 </div>
                             </li><!-- voice-card -->
 

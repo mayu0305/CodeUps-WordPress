@@ -74,7 +74,7 @@
                                                 ご予約・お問い合わせはコチラ
                                             </span>
                                             <div class="campaign-card__info-link">
-                                                <a class="link-button" href="page-contact.html">
+                                                <a class="link-button" href="<?php echo esc_url(home_url()); ?>/contact/">
                                                     <span class="link-button__text">Contact us</span>
                                                     <span class="link-button__arrow">
                                                     </span>

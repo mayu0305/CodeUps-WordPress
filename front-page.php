@@ -106,7 +106,7 @@
               <div class="swiper-button-next top-campaign__button-next"></div>
             </div>
             <div class="top-campaign__link">
-              <a class="link-button" href="/campaign/">
+              <a class="link-button" href="<?php echo esc_url( home_url() ); ?>/campaign/">
                 <span class="link-button__text">View more</span>
                 <span class="link-button__arrow">
                 </span>
@@ -142,7 +142,7 @@
               ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。
               </div>
               <div class="aboutAs-intro__text-link">
-                <a class="link-button" href="/aboutus/">
+                <a class="link-button" href="<?php echo esc_url( home_url() ); ?>/aboutus/">
                   <span class="link-button__text">View more</span>
                   <span class="link-button__arrow">
                   </span>
@@ -170,7 +170,7 @@
               正規登録店として、安心安全に初めての方でも安心安全にライセンス取得をサポート致します。
             </div>
             <div class="top-info-text__link">
-              <a class="link-button" href="/information/">
+              <a class="link-button" href="<?php echo esc_url( home_url() ); ?>/information/">
                 <span class="link-button__text">View more</span>
                 <span class="link-button__arrow">
                 </span>
@@ -235,7 +235,7 @@
         </article><!-- top-blog__items -->
 
         <div class="top-blog__link">
-          <a class="link-button" href="/blog/">
+          <a class="link-button" href="<?php echo esc_url( home_url() ); ?>/blog/">
             <span class="link-button__text">View more</span>
             <span class="link-button__arrow">
             </span>
@@ -309,7 +309,12 @@
                 </figure>
               </div><!--voice-card__header -->
               <div class="voice-card__text">
-                <?php the_content(); ?>
+                <?php
+                    $content = get_the_content();
+                    $content = wp_strip_all_tags( $content );
+                    $content = strip_shortcodes( $content );
+                    echo $content;
+                ?>
               </div>
             </li><!-- voice-card -->
           <?php
@@ -320,7 +325,7 @@
 
         </ul><!-- top-voice__items -->
         <div class="top-voice__link">
-          <a class="link-button" href="/voice/">
+          <a class="link-button" href="<?php echo esc_url( home_url() ); ?>/voice/">
             <span class="link-button__text">View more</span>
             <span class="link-button__arrow">
             </span>
@@ -426,7 +431,7 @@
           </figure>
         </div><!-- top-price__contents -->
         <div class="top-price__link">
-          <a class="link-button" href="/price/">
+          <a class="link-button" href="<?php echo esc_url( home_url() ); ?>/price/">
             <span class="link-button__text">View more</span>
             <span class="link-button__arrow">
             </span>

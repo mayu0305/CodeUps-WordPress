@@ -14,18 +14,18 @@
 
         <?php get_template_part( 'template-parts/breadcrumb' ); ?>
 
-      <div class="page-content page-content--sitemap">
-          <div class="inner">
+        <div class="page-content page-content--sitemap">
+            <div class="inner">
 
-              <div class="sitemap-content">
-                <?php get_template_part( 'template-parts/nav-menu' ); ?>
-              </div>
+                <div class="sitemap-content">
+                    <?php get_template_part( 'template-parts/nav-menu' ); ?>
+                </div>
 
-          </div><!-- inner -->
-      </div><!-- page-content -->
+            </div><!-- inner -->
+        </div><!-- page-content -->
 
-      <?php get_template_part( 'template-parts/section-contact' ); ?>
+        <?php get_template_part( 'template-parts/section-contact' ); ?>
 
-  </main>
+    </main>
 
 <?php get_footer(); ?>

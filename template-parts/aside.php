@@ -20,7 +20,9 @@
                     <time class="aside-article__item-date" datetime="<?php the_time('Y-m-d'); ?>">
                         <?php the_time( get_option( 'date_format' ) ); ?>
                     </time>
-                    <h3 class="aside-article__item-title"><?php the_title(); ?></h3>
+                    <h3 class="aside-article__item-title">
+                        <?php echo wp_trim_words( get_the_title(), 16, '…' ); ?>
+                    </h3>
                 </div>
                 <figure class="aside-article__item-img">
                     <?php if ( has_post_thumbnail() ) : ?>
@@ -79,7 +81,8 @@
                             )
                         </span>
                         <h3 class="aside-voice__title">
-                            <?php the_title(); ?>
+                            <!-- <?php the_title(); ?> -->
+                            <?php echo wp_trim_words( get_the_title(), 20, '…' ); ?>
                         </h3>
                     </div>
                     <figure class="aside-voice__img">

@@ -17,94 +17,44 @@
         <div class="price-content page-content">
             <div class="inner inner--narrow">
                 <ul class="price-content__items">
-                    <li class="price-content__item" id="priceLlicense">
-                        <div class="price-content__item-box">
-                            <h2 class="price-content__item-title">
-                                ライセンス講習
-                            </h2>
-                            <dl class="price-content__item-dlist price-list">
+
+                <?php
+                    for ($i = 1; $i <= 4; $i++) :
+                    $priceItems = SCF::get_option_meta('price-options', "price-item0$i");
+                    $programName = SCF::get_option_meta('price-options', "program0$i");
+
+                    // 空でない配列かつ中身が空でない場合
+                    if (!empty($priceItems) && !empty(array_filter($priceItems[0]))) :
+                ?>
+
+                <li class="price-content__item" id="<?php echo "program0$i"; ?>">
+                    <div class="price-content__item-box">
+                        <h2 class="price-content__item-title">
+                            <?php echo $programName; ?>
+                        </h2>
+                        <dl class="price-content__item-dlist price-list">
+                            <?php foreach ($priceItems as $priceItem) : ?>
                                 <?php
-                                    $link_group = SCF::get('license');
-                                    foreach ($link_group as $fields ) {
+                                    $course = $priceItem["course0$i"];
+                                    $price = $priceItem["price0$i"];
                                 ?>
-                                    <div class="price-list__item">
-                                        <dt class="price-list__item-term">
-                                            <?php echo $fields['license-course']; ?>
-                                        </dt>
-                                        <dd class="price-list__item-desc">
-                                            <?php echo $fields['license-price']; ?>
-                                        </dd>
-                                    </div>
-                                <?php } ?>
-                            </dl>
-                        </div>
-                    </li><!-- price-content__item -->
-                    <li class="price-content__item" id="price-Experience">
-                        <div class="price-content__item-box">
-                            <h2 class="price-content__item-title">
-                                体験ダイビング
-                            </h2>
-                            <dl class="price-content__item-dlist price-list">
-                                <?php
-                                    $link_group = SCF::get('trial');
-                                    foreach ($link_group as $fields ) {
-                                ?>
-                                    <div class="price-list__item">
-                                        <dt class="price-list__item-term">
-                                            <?php echo $fields['trial-course']; ?>
-                                        </dt>
-                                        <dd class="price-list__item-desc">
-                                            <?php echo $fields['trial-price']; ?>
-                                        </dd>
-                                    </div>
-                                <?php } ?>
-                            </dl>
-                        </div>
-                    </li><!-- price-content__item -->
-                    <li class="price-content__item" id="priceFan">
-                        <div class="price-content__item-box">
-                            <h2 class="price-content__item-title">
-                                ファンダイビング
-                            </h2>
-                            <dl class="price-content__item-dlist price-list">
-                                <?php
-                                    $link_group = SCF::get('fun');
-                                    foreach ($link_group as $fields ) {
-                                ?>
-                                    <div class="price-list__item">
-                                        <dt class="price-list__item-term">
-                                            <?php echo $fields['fun-course']; ?>
-                                        </dt>
-                                        <dd class="price-list__item-desc">
-                                            <?php echo $fields['fun-price']; ?>
-                                        </dd>
-                                    </div>
-                                <?php } ?>
-                            </dl>
-                        </div>
-                    </li><!-- price-content__item -->
-                    <li class="price-content__item" id="priceSpecial">
-                        <div class="price-content__item-box">
-                            <h2 class="price-content__item-title">
-                                スペシャルダイビング
-                            </h2>
-                            <dl class="price-content__item-dlist price-list">
-                                <?php
-                                        $link_group = SCF::get('special');
-                                        foreach ($link_group as $fields ) {
-                                    ?>
-                                        <div class="price-list__item">
-                                            <dt class="price-list__item-term">
-                                                <?php echo $fields['special-course']; ?>
-                                            </dt>
-                                            <dd class="price-list__item-desc">
-                                                <?php echo $fields['special-price']; ?>
-                                            </dd>
-                                        </div>
-                                    <?php } ?>
-                            </dl>
-                        </div>
-                    </li><!-- price-content__item -->
+                                <div class="price-list__item">
+                                    <dt class="price-list__item-term">
+                                        <?php echo $course; ?>
+                                    </dt>
+                                    <dd class="price-list__item-desc">
+                                        ¥<?php echo $price; ?>
+                                    </dd>
+                                </div>
+                            <?php endforeach; ?>
+                        </dl>
+                    </div>
+                </li><!-- price-content__item -->
+
+                <?php endif;
+                    endfor;
+                ?>
+
                 </ul><!-- price-content__items -->
             </div><!-- inner inner--narrow -->
         </div>

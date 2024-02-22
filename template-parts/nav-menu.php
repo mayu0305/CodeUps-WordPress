@@ -59,16 +59,16 @@
             <li class="nav-menu__item<?php if( is_page('sitemap') ) : ?> nav-menu__item--sitemap<?php endif; ?> sub-menu">
             <ul class="sub-menu__items">
                 <li class="sub-menu__item">
-                <a href="<?php echo esc_url(home_url()); ?>/price#priceLlicense">ライセンス講習</a>
+                <a href="<?php echo esc_url(home_url()); ?>/price#program01">ライセンス講習</a>
                 </li>
                 <li class="sub-menu__item">
-                <a href="<?php echo esc_url(home_url()); ?>/price#price-Experience">体験ダイビング</a>
+                <a href="<?php echo esc_url(home_url()); ?>/price#program02">体験ダイビング</a>
                 </li>
                 <li class="sub-menu__item">
-                <a href="<?php echo esc_url(home_url()); ?>/price#priceFan">ファンダイビング</a>
+                <a href="<?php echo esc_url(home_url()); ?>/price#program03">ファンダイビング</a>
                 </li>
                 <li class="sub-menu__item">
-                <a href="<?php echo esc_url(home_url()); ?>/price#priceSpecial">スペシャルダイビング</a>
+                <a href="<?php echo esc_url(home_url()); ?>/price#program04">スペシャルダイビング</a>
                 </li>
             </ul>
             </li>

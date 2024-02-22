@@ -71,7 +71,7 @@
                                             </span>
                                         </div>
                                         <h2 class="voice-card__header-title">
-                                            <?php the_title(); ?>
+                                            <?php echo wp_trim_words( get_the_title(), 19, '…' ); ?>
                                         </h2>
                                     </div><!--voice-card__header-text -->
                                     <figure class="voice-card__header-img js-scroll">
@@ -81,12 +81,7 @@
                                     </figure>
                                 </div><!--voice-card__header -->
                                 <div class="voice-card__text">
-                                    <?php
-										$content = get_the_content();
-										$content = wp_strip_all_tags( $content );
-										$content = strip_shortcodes( $content );
-										echo $content;
-									?>
+                                    <?php echo wp_trim_words( get_the_content(), 165, '…' ); ?>
                                 </div>
                             </li><!-- voice-card -->
 

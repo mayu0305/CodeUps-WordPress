@@ -208,13 +208,14 @@
                     <?php the_time( get_option( 'date_format' ) ); ?>
                   </time>
                   <h3 class="blog-card__content-title">
-                    <?php the_title(); ?>
+                    <?php echo get_the_title(); ?>
                   </h3>
                   <p class="blog-card__content-text">
                     <?php
                         $content = get_the_content();
                         $content = wp_strip_all_tags( $content );
                         $content = strip_shortcodes( $content );
+                        $content = wp_trim_words( $content, 90, '…' ); // 文字制限
                         echo $content;
                     ?>
                   </p>
@@ -299,7 +300,8 @@
                     </span>
                   </div>
                   <h3 class="voice-card__header-title">
-                    <?php the_title(); ?>
+                    <!-- <?php the_title(); ?> -->
+                    <?php echo wp_trim_words( get_the_title(), 19, '…' ); ?>
                   </h3>
                 </div><!--voice-card__header-text -->
                 <figure class="voice-card__header-img js-scroll">
@@ -309,12 +311,7 @@
                 </figure>
               </div><!--voice-card__header -->
               <div class="voice-card__text">
-                <?php
-                    $content = get_the_content();
-                    $content = wp_strip_all_tags( $content );
-                    $content = strip_shortcodes( $content );
-                    echo $content;
-                ?>
+                <?php echo wp_trim_words( get_the_content(), 165, '…' ); ?>
               </div>
             </li><!-- voice-card -->
           <?php
@@ -342,86 +339,44 @@
         </div>
         <div class="top-price__contents">
           <ul class="top-price__contents-items top-price-lists">
-            <li class="top-price-list">
+
+          <?php
+            for ($i = 1; $i <= 4; $i++) :
+              $priceItems = SCF::get_option_meta('price-options', "price-item0$i");
+              $programName = SCF::get_option_meta('price-options', "program0$i");
+
+            // 空でない配列かつ中身が空でない場合
+            if (!empty($priceItems) && !empty(array_filter($priceItems[0]))) :
+          ?>
+
+          <li class="top-price-list">
               <h3 class="top-price-list__title">
-                ライセンス講習
+                <?php echo $programName; ?>
               </h3>
               <dl class="top-price-list__items">
-                <?php
-                  $link_group = SCF::get('license', 38);
-                  foreach ($link_group as $fields ) {
-                ?>
+                <?php foreach ($priceItems as $priceItem) : ?>
+                  <?php
+                    $course = $priceItem["course0$i"];
+                    $price = $priceItem["price0$i"];
+                  ?>
+
                   <div class="top-price-list__item">
                     <dt class="top-price-list__item-term">
-                      <?php echo $fields['license-course']; ?>
+                      <?php echo $course; ?>
                     </dt>
                     <dd class="top-price-list__item-desc">
-                      <?php echo $fields['license-price']; ?>
+                      ¥<?php echo $price; ?>
                     </dd>
                   </div>
-                <?php } ?>
+
+                <?php endforeach; ?>
               </dl>
-            </li>
-            <li class="top-price-list">
-              <h3 class="top-price-list__title">
-                体験ダイビング
-              </h3>
-              <dl class="top-price-list__items">
-                <?php
-                    $link_group = SCF::get('trial', 38);
-                    foreach ($link_group as $fields ) {
-                  ?>
-                    <div class="top-price-list__item">
-                      <dt class="top-price-list__item-term">
-                        <?php echo $fields['trial-course']; ?>
-                      </dt>
-                      <dd class="top-price-list__item-desc">
-                        <?php echo $fields['trial-price']; ?>
-                      </dd>
-                    </div>
-                  <?php } ?>
-              </dl>
-            </li>
-            <li class="top-price-list">
-              <h3 class="top-price-list__title">
-                ファンダイビング
-              </h3>
-              <dl class="top-price-list__items">
-                <?php
-                    $link_group = SCF::get('fun', 38);
-                    foreach ($link_group as $fields ) {
-                  ?>
-                    <div class="top-price-list__item">
-                      <dt class="top-price-list__item-term">
-                        <?php echo $fields['fun-course']; ?>
-                      </dt>
-                      <dd class="top-price-list__item-desc">
-                        <?php echo $fields['fun-price']; ?>
-                      </dd>
-                    </div>
-                  <?php } ?>
-              </dl>
-            </li>
-            <li class="top-price-list">
-              <h3 class="top-price-list__title">
-                スペシャルダイビング
-              </h3>
-              <dl class="top-price-list__items">
-                <?php
-                    $link_group = SCF::get('special', 38);
-                    foreach ($link_group as $fields ) {
-                  ?>
-                    <div class="top-price-list__item">
-                      <dt class="top-price-list__item-term">
-                        <?php echo $fields['special-course']; ?>
-                      </dt>
-                      <dd class="top-price-list__item-desc">
-                        <?php echo $fields['special-price']; ?>
-                      </dd>
-                    </div>
-                  <?php } ?>
-              </dl>
-            </li>
+          </li>
+
+          <?php endif;
+            endfor;
+          ?>
+
           </ul>
           <figure class="top-price__img js-scroll">
             <picture>
@@ -444,5 +399,3 @@
   </main>
 
 <?php get_footer(); ?>
-
-

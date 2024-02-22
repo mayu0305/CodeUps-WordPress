@@ -16,7 +16,7 @@
   gtag('config', 'G-7E2J6GNNMG');
 </script>
 </head>
-<body>
+<body id="top">
   <header class="header js-header">
     <div class="header__content">
       <h1 class="header__logo">

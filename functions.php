@@ -132,10 +132,18 @@ function change_posts_per_page($query) {
         return;
     }
 
+    //カスタム投稿
     if ($query->is_archive() && $query->get('post_type') == 'voice') {
         $query->set('posts_per_page', 6);
     } elseif ($query->is_archive() && $query->get('post_type') == 'campaign') {
         $query->set('posts_per_page', 4);
+    }
+    //カスタムタクソノミー
+    if ($query->is_tax('voice_category')) {
+      $query->set('posts_per_page', '6');
+    }
+    if ($query->is_tax('campaign_category')) {
+      $query->set('posts_per_page', '4');
     }
 }
 
@@ -172,16 +180,31 @@ add_filter( 'wpcf7_form_tag', 'dynamic_field_values', 30, 2);
 
 
 /* 管理画面での表示項目追加 */
-function add_custom_column( $defaults ) {
-  $defaults['cf_column'] = 'fv-images'; //項目名
-  return $defaults;
-}
-add_filter('manage_fv-images_posts_columns', 'add_custom_column');
+//function add_custom_column( $defaults ) {
+  //項目名
+//  $defaults['cf_column'] = 'fv-images';
+//  return $defaults;
+//}
+//add_filter('manage_fv-images_posts_columns', 'add_custom_column');
 
-function add_custom_column_id($column_name, $id) {
-  if ($column_name == 'cf_column') {
-  $cf_column = get_field('cf_column', $id);
-  echo $cf_column;
-  }
-}
-add_action('manage_fv-images_posts_custom_column', 'add_custom_column_id', 10, 2);
+//function add_custom_column_id($column_name, $id) {
+//  if ($column_name == 'cf_column') {
+//  $cf_column = get_field('cf_column', $id);
+//  echo $cf_column;
+//  }
+//}
+//add_action('manage_fv-images_posts_custom_column', 'add_custom_column_id', 10, 2);
+
+
+//管理画面に繰り返しフィールドを表示させる
+/**
+ * @param string $page_title ページのtitle属性値
+ * @param string $menu_title 管理画面のメニューに表示するタイトル
+ * @param string $capability メニューを操作できる権限（manage_options とか）
+ * @param string $menu_slug オプションページのスラッグ。ユニークな値にすること。
+ * @param string|null $icon_url メニューに表示するアイコンの URL
+ * @param int $position メニューの位置
+ */
+SCF::add_options_page( 'ギャリー画像', 'ギャラリー画像', 'manage_options', 'gallery-options', 'dashicons-images-alt2', '7');
+SCF::add_options_page( '料金表', '料金表', 'manage_options', 'price-options', 'dashicons-money-alt', '8');
+SCF::add_options_page( 'よくある質問', 'よくある質問', 'manage_options', 'faq-options', 'dashicons-editor-help', '9');

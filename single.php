@@ -29,7 +29,13 @@
                                     <?php the_title(); ?>
                                 </h2>
                                 <div class="post__content-body">
-                                    <?php the_content(); ?>
+                                <?php if ( have_posts() ) : ?>
+                                    <?php while ( have_posts() ) : the_post(); ?>
+                                        <?php the_content(); ?>
+                                    <?php
+                                        endwhile;
+                                        endif;
+                                    ?>
                                 </div><!-- post__content-body -->
                             </div><!-- post__content -->
                         </div><!-- blog-content__main-items post -->

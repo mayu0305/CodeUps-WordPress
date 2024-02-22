@@ -1574,16 +1574,18 @@ textarea:focus {
 	font-weight: 500;
 	overflow: hidden;
 	padding-bottom: 0.21875rem;
-	text-overflow: ellipsis;
-	white-space: nowrap;
+	-webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    display: -webkit-box;
 }
 
 .blog-card__content-text {
-	-webkit-box-orient: vertical;
+	/* -webkit-box-orient: vertical;
 	-webkit-line-clamp: 5;
 	display: -webkit-box;
 	margin-top: 1rem;
-	overflow: hidden;
+	overflow: hidden; */
+	text-align: justify;
 }
 
 .blog-card__img {
@@ -1888,6 +1890,13 @@ textarea:focus {
 	height: 2.125rem;
 	line-height: 2rem;
 	max-width: 10.125rem;
+}
+
+.course-tab__item a{
+	display: block;
+	text-align: center;
+	height: inherit;
+	width: inherit;
 }
 
 .course-tab__item.is-active {
@@ -2378,6 +2387,10 @@ textarea:focus {
 	background-image: url(../images/common/icon-starfish--black.svg);
 }
 
+.sitemap-content .nav-menu__item--sitemap > a::before {
+    background-image: url(../images/common/icon-starfish--black.svg);
+}
+
 .page-content {
 	margin-top: 3.125rem;
 }
@@ -2636,7 +2649,8 @@ textarea:focus {
 }
 
 .to-top {
-	display: block;
+	/* display: block; */
+	display: none;
 	height: 3rem;
 	margin: 0 0.9375rem 1rem auto;
 	width: 3rem;
@@ -2704,6 +2718,7 @@ textarea:focus {
 
 .voice-card__text {
 	margin-top: 1.0625rem;
+	text-align: justify;
 }
 
 @media screen and (min-width: 768px) {

@@ -35,6 +35,7 @@
                                                 $content = get_the_content();
                                                 $content = wp_strip_all_tags( $content );
                                                 $content = strip_shortcodes( $content );
+                                                $content = wp_trim_words( $content, 90, '…' );
                                                 echo $content;
                                             ?>
                                         </p>

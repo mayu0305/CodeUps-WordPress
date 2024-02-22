@@ -7,7 +7,7 @@
         <footer class="footer">
     <?php endif; ?>
 
-        <a href="#" class="to-top">
+        <a href="#top" class="to-top">
             <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/to-top.svg" alt="トップへ戻るボタン" decoding="async" loading="lazy">
         </a>
         <div class="inner">
@@ -16,10 +16,10 @@
             <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/logo--white.svg" alt="CodeUps" decoding="async" loading="lazy">
             </div>
             <div class="footer__upper-sns">
-                <a href="" target="_blank">
+                <a href="https://www.facebook.com/liencreate0502" target="_blank">
                     <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/icon-facebook.svg" alt="facebookリンク" decoding="async" loading="lazy">
                 </a>
-                <a href="" target="_blank">
+                <a href="https://www.instagram.com/lien.create/" target="_blank">
                     <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/icon-Instagram.svg" alt="Instagramリンク" decoding="async" loading="lazy">
                 </a>
             </div>

@@ -4,30 +4,38 @@
     <div class="fv">
       <div class="fv__img-wrap js-fv-swiper">
         <ul class="swiper-wrapper">
-            <li class="swiper-slide fv__img">
-              <picture>
-                <source media="(min-width: 768px)" srcset="<?php echo get_field('fv-image_pc01')['url']; ?>">
-                <img src="<?php echo get_field('fv-image_sp01')['url']; ?>" alt="<?php echo get_field('fv-image_sp01')['alt']; ?>" decoding="async">
-              </picture>
-            </li>
-            <li class="swiper-slide fv__img">
-              <picture>
-                <source media="(min-width: 768px)" srcset="<?php echo get_field('fv-image_pc02')['url']; ?>">
-                <img src="<?php echo get_field('fv-image_sp02')['url']; ?>" alt="<?php echo get_field('fv-image_sp02')['alt']; ?>" decoding="async">
-              </picture>
-            </li>
-            <li class="swiper-slide fv__img">
-              <picture>
-                <source media="(min-width: 768px)" srcset="<?php echo get_field('fv-image_pc03')['url']; ?>">
-                <img src="<?php echo get_field('fv-image_sp03')['url']; ?>" alt="<?php echo get_field('fv-image_sp03')['alt']; ?>" decoding="async">
-              </picture>
-            </li>
-            <li class="swiper-slide fv__img">
-              <picture>
-                <source media="(min-width: 768px)" srcset="<?php echo get_field('fv-image_pc04')['url']; ?>">
-                <img src="<?php echo get_field('fv-image_sp04')['url']; ?>" alt="<?php echo get_field('fv-image_sp04')['alt']; ?>" decoding="async">
-              </picture>
-            </li>
+        <?php
+          $fv_images_posts = get_posts(array(
+              'post_type' => 'fv-images',
+              'posts_per_page' => -1,
+          ));
+        ?>
+        <?
+        foreach ($fv_images_posts as $post) :
+            setup_postdata($post);
+
+            // PC画像とSP画像の配列を取得
+            $pc_images = get_field('fv-image_pc');
+            $sp_images = get_field('fv-image_sp');
+
+            // 画像の数を取得（PCとSPで同じ数であることを想定）
+            $image_count = count($pc_images);
+
+            // PC画像とSP画像を対応させて出力
+            for ($i = 1; $i <= $image_count; $i++) {
+        ;?>
+
+          <li class="swiper-slide fv__img">
+            <picture>
+              <source media="(min-width: 768px)" srcset="<?php echo esc_url($pc_images['pc-image' . sprintf('%02d', $i)]['url']); ?>">
+              <? echo '<img src="' . esc_url($sp_images['sp-image' . sprintf('%02d', $i)]['url']) . '" alt="' . esc_attr($sp_images['sp-image' . sprintf('%02d', $i)]['alt']) . '" decoding="async">'; ?>
+            </picture>
+          </li>
+
+        <?  }
+        endforeach;
+        wp_reset_postdata();
+        ?>
         </ul>
       </div><!-- fv__img-wrap js-fv-swiper -->
       <div class="fv__text">

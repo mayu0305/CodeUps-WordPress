@@ -18,7 +18,7 @@
             <div class="inner">
 
             <ul class="course-tab__items">
-                <li class="course-tab__item is-active"><a href="<?php echo esc_url( home_url() ); ?>/campaign/">All</a></li>
+                <li class="course-tab__item"><a href="<?php echo esc_url( home_url() ); ?>/voice/">All</a></li>
                 <?php
                     $terms = get_terms(array(
                         'taxonomy' => 'voice_category',
@@ -29,7 +29,8 @@
                     foreach ($terms as $term) {
                         $term_link = esc_url(get_term_link($term));
                         $term_name = esc_html($term->name);
-                        echo '<li class="course-tab__item"><a href="' . $term_link . '">' . $term_name . '</a></li>';
+                        $is_active = (is_tax('voice_category', $term->term_id)) ? 'is-active' : '';
+                        echo '<li class="course-tab__item ' . $is_active . '"><a href="' . $term_link . '">' . $term_name . '</a></li>';
                     }
                 }
                 ?>
@@ -101,14 +102,14 @@
                 </ul><!-- page-voice__items voice-cards -->
             </div><!-- course-tab__panel-wrap -->
 
-                <div class="campaign-content__page-nav">
-                    <nav class="navigation pagination" aria-label="投稿">
-                        <h2 class="screen-reader-text visually-hidden">投稿ナビゲーション</h2>
-                        <div class="pagination__links">
-                            <?php wp_pagenavi(); ?>
-                        </div>
-                    </nav>
-                </div>
+            <div class="campaign-content__page-nav">
+                <nav class="navigation pagination" aria-label="投稿">
+                    <h2 class="screen-reader-text visually-hidden">投稿ナビゲーション</h2>
+                    <div class="pagination__links">
+                        <?php wp_pagenavi(); ?>
+                    </div>
+                </nav>
+            </div>
 
             </div><!-- inner -->
         </div>

@@ -58,6 +58,7 @@ jQuery(function ($) {
   $(window).scroll(function () {
     //スクロールしたら処理を開始する
 
+  //TOPへ戻るボタン フッターが表示されるまでは固定、フッターが表示されたら固定解除
     var pagetop = $(".to-top");
     var scroll = $(window).scrollTop() + $(window).height(); //ページトップから現在の画面下部までの高さ
     var footer = $("footer").offset().top; //ページトップからfooterまでの高さ
@@ -247,9 +248,6 @@ tabs.forEach(function (tab) {
 
 //Informationタブはこちら
 document.addEventListener('DOMContentLoaded', function () {
-  // 初めに1つ目のタブを表示
-  showTab('tab1');
-
   // タブがクリックされたときの処理
   document.querySelectorAll('.js-infoTab').forEach(function (tab) {
     tab.addEventListener('click', function (event) {
@@ -265,8 +263,18 @@ document.addEventListener('DOMContentLoaded', function () {
   if (initialTab) {
     // URLパラメータにタブが指定されている場合はそのタブを表示
     showTab(initialTab);
+  } else {
+    // URLのハッシュにタブが指定されている場合もそのタブを表示
+    var hashTab = window.location.hash.substring(1);
+    if (hashTab) {
+      showTab(hashTab);
+    } else {
+      // どのタブも指定されていない場合は初めのタブを表示
+      showTab('tab1');
+    }
   }
 });
+
 function showTab(tabId) {
   // すべてのタブコンテンツを非表示にする
   document.querySelectorAll('.js-infoContent').forEach(function (content) {
@@ -290,6 +298,7 @@ function showTab(tabId) {
     activeTabLink.classList.add('-active');
   }
 }
+
 //infoタブココまで
 
 //FAQアコーディオン

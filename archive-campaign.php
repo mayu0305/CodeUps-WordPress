@@ -46,59 +46,59 @@
                     <?php if ( have_posts() ) : ?>
                         <?php while ( have_posts() ) : the_post(); ?>
 
-                            <div class="campaign-card campaign-cards__item">
-                                <div class="campaign-card__content campaign-card__content--page">
-                                    <div class="campaign-card__content-header">
-                                        <span span class="card-tag">
-                                            <?php
-                                                $cterms = get_the_terms(get_the_ID(), $taxonomy_slug);
-                                                if ($cterms && !is_wp_error($cterms)) :
-                                                    foreach ($cterms as $term) :
-                                                        echo esc_html($term->name);
-                                                    endforeach;
-                                                endif;
-                                                ?>
-                                        </span>
-                                        <h2 class="campaign-card__content-title campaign-card__content-title--page">
-                                            <?php the_title(); ?>
-                                        </h2>
-                                    </div>
-                                    <span class="campaign-card__content-desc campaign-card__content-desc--page">
-                                        全部コミコミ(お一人様)
+                        <div class="campaign-card campaign-cards__item">
+                            <div class="campaign-card__content campaign-card__content--page">
+                                <div class="campaign-card__content-header">
+                                    <span span class="card-tag">
+                                        <?php
+                                            $cterms = get_the_terms(get_the_ID(), $taxonomy_slug);
+                                            if ($cterms && !is_wp_error($cterms)) :
+                                                foreach ($cterms as $term) :
+                                                    echo esc_html($term->name);
+                                                endforeach;
+                                            endif;
+                                            ?>
                                     </span>
-                                    <div class="campaign-card__content-price">
-                                        <span class="campaign-card__content-price-regular">¥<?php the_field('list-price'); ?></span>
-                                        <span class="campaign-card__content-price-sale campaign-card__content-price-sale--page">¥<?php the_field('campaign-price'); ?></span>
+                                    <h2 class="campaign-card__content-title campaign-card__content-title--page">
+                                        <?php the_title(); ?>
+                                    </h2>
+                                </div>
+                                <span class="campaign-card__content-desc campaign-card__content-desc--page">
+                                    全部コミコミ(お一人様)
+                                </span>
+                                <div class="campaign-card__content-price">
+                                    <span class="campaign-card__content-price-regular">¥<?php the_field('list-price'); ?></span>
+                                    <span class="campaign-card__content-price-sale campaign-card__content-price-sale--page">¥<?php the_field('campaign-price'); ?></span>
+                                </div>
+                                <div class="campaign-card__description u-desktop ">
+                                    <?php the_content(); ?>
+                                </div>
+                                <div class="campaign-card__info u-desktop ">
+                                    <span class="campaign-card__info-period">
+                                    <?php the_field('period'); ?>
+                                    </span>
+                                    <span class="campaign-card__info-guid">
+                                        ご予約・お問い合わせはコチラ
+                                    </span>
+                                    <div class="campaign-card__info-link">
+                                        <a class="link-button" href="<?php echo esc_url(home_url()); ?>/contact/">
+                                            <span class="link-button__text">Contact us</span>
+                                            <span class="link-button__arrow">
+                                            </span>
+                                        </a>
                                     </div>
-                                    <div class="campaign-card__description u-desktop ">
-                                        <?php the_content(); ?>
-                                    </div>
-                                    <div class="campaign-card__info u-desktop ">
-                                        <span class="campaign-card__info-period">
-                                        <?php the_field('period'); ?>
-                                        </span>
-                                        <span class="campaign-card__info-guid">
-                                            ご予約・お問い合わせはコチラ
-                                        </span>
-                                        <div class="campaign-card__info-link">
-                                            <a class="link-button" href="<?php echo esc_url(home_url()); ?>/contact/">
-                                                <span class="link-button__text">Contact us</span>
-                                                <span class="link-button__arrow">
-                                                </span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div><!-- campaign-card__content-->
-                                <figure class="campaign-card__img">
-                                    <?php $image = get_field('image'); if( !empty($image) ): ?>
-                                        <img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" decoding="async" loading="lazy">
-                                    <?php endif; ?>
-                                </figure>
-                            </div><!-- campaign-card-->
-                        <?php endwhile;
-                            endif;
-                            wp_reset_postdata();
-                        ?>
+                                </div>
+                            </div><!-- campaign-card__content-->
+                            <figure class="campaign-card__img">
+                                <?php $image = get_field('image'); if( !empty($image) ): ?>
+                                    <img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" decoding="async" loading="lazy">
+                                <?php endif; ?>
+                            </figure>
+                        </div><!-- campaign-card-->
+                    <?php endwhile;
+                        endif;
+                        wp_reset_postdata();
+                    ?>
                 </div><!-- campaign-cards -->
             </div><!-- course-tab__panel-wrap -->
 

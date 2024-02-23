@@ -205,6 +205,7 @@ add_filter( 'wpcf7_form_tag', 'dynamic_field_values', 30, 2);
  * @param string|null $icon_url メニューに表示するアイコンの URL
  * @param int $position メニューの位置
  */
-SCF::add_options_page( 'ギャリー画像', 'ギャラリー画像', 'manage_options', 'gallery-options', 'dashicons-images-alt2', '7');
+//SCF::add_options_page( 'FV画像', 'FV画像', 'manage_options', 'fv-options', 'dashicons-images-alt2', '7');
 SCF::add_options_page( '料金表', '料金表', 'manage_options', 'price-options', 'dashicons-money-alt', '8');
 SCF::add_options_page( 'よくある質問', 'よくある質問', 'manage_options', 'faq-options', 'dashicons-editor-help', '9');
+

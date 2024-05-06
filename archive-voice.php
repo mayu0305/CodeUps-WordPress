@@ -18,7 +18,7 @@
             <div class="inner">
 
             <ul class="course-tab__items">
-                <li class="course-tab__item is-active"><a href="<?php echo esc_url( home_url() ); ?>/campaign/">All</a></li>
+                <li class="course-tab__item is-active"><a href="<?php echo esc_url( home_url('/voice/') ); ?>">All</a></li>
                 <?php
                     $terms = get_terms(array(
                         'taxonomy' => 'voice_category',
@@ -50,22 +50,12 @@
                                 <div class="voice-card__header-text">
                                     <div class="voice-card__header-status">
                                         <span class="voice-card__header-demographic">
-                                            <?php if( get_field('age') == "10代") : ?>10代
-                                                <?php elseif( get_field('age') == "20代"): ?>20代
-                                                <?php elseif( get_field('age') == "30代"): ?>30代
-                                                <?php elseif( get_field('age') == "40代"): ?>40代
-                                                <?php elseif( get_field('age') == "50代"): ?>50代
-                                                <?php elseif( get_field('age') == "60代"): ?>60代
-                                                <?php elseif( get_field('age') == "70代"): ?>70代
+                                        <?php if(get_field('age')): ?>
+                                            <?php the_field('age'); ?>
+                                        <?php endif; ?>
+                                        <?php if(get_field('sex')): ?>
+                                            (<?php the_field('sex'); ?>)
                                             <?php endif; ?>
-                                            (
-                                            <?php if( get_field('sex') == "女性"): ?>女性
-                                                <?php elseif( get_field('sex') == "男性"): ?>男性
-                                                <?php elseif( get_field('sex') == "未選択"): ?>未選択
-                                                <?php elseif( get_field('sex') == "カップル"): ?>カップル
-                                                <?php elseif( get_field('sex') == "夫婦"): ?>夫婦
-                                            <?php endif; ?>
-                                            )
                                         </span>
                                         <span span class="card-tag">
                                             <?php
@@ -82,11 +72,11 @@
                                         <?php echo wp_trim_words( get_the_title(), 19, '…' ); ?>
                                     </h2>
                                 </div><!--voice-card__header-text -->
-                                <figure class="voice-card__header-img js-scroll">
-                                    <?php $image = get_field('image'); if( !empty($image) ): ?>
+                                <?php $image = get_field('image'); if( !empty($image) ): ?>
+                                    <figure class="voice-card__header-img js-scroll">
                                         <img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" decoding="async" loading="lazy">
-                                    <?php endif; ?>
-                                </figure>
+                                    </figure>
+                                <?php endif; ?>
                             </div><!--voice-card__header -->
                             <div class="voice-card__text">
                                 <?php echo wp_trim_words( get_the_content(), 165, '…' ); ?>

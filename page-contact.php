@@ -17,6 +17,7 @@
     <div class="page-content contact">
         <div class="inner inner--narrow">
 
+            <p class="page-content__error-message"></p>
 
             <div class="contact__form">
                 <?php echo do_shortcode('[contact-form-7 id="88893be" title="form"]'); ?>

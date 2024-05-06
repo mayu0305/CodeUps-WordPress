@@ -19,7 +19,7 @@
                 <div class="faq-content__items">
                     <?php
                         $link_group = SCF::get('faq-list');
-                        foreach ($link_group as $fields ) {
+                        foreach ($link_group as $fields ) :
                     ?>
                         <details class="faq-content__item faq-item js-faqItem">
                             <summary class="faq-item__question js-faqQuestion">
@@ -31,7 +31,7 @@
                                 </p>
                             </div>
                         </details>
-                    <?php } ?>
+                    <?php endforeach; ?>
                 </div>
             </div><!-- inner -->
         </div><!-- faq-content page-content -->

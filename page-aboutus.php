@@ -42,47 +42,46 @@
                 </div>
             </section><!-- aboutAs-info -->
 
-            <section class="aboutAs-gallery page-content__section">
-                <div class="inner">
-                    <div class="section-title">
-                        <span class="section-title__sub" aria-hidden="true">Gallery</span>
-                        <h2 class="section-title__main">フォト</h2>
-                    </div>
-                    <div class="aboutAs-gallery__post gallery-post">
-                        <div class="gallery-post__grid-items">
-                            <?php
-                                $link_group = SCF::get('gallery-image__list');
-                                foreach ($link_group as $fields ) {
-                                ?>
-                                <button class="modal-btn gallery-post__grid-item" data-micromodal-trigger="modal-<?php echo $fields['gallery-order']; ?>" aria-label="モーダルボタン">
-                                    <img class="gallery-img" src="<?php echo wp_get_attachment_url($fields['gallery-image']); ?>" alt="<?php echo $fields['gallery-alt']; ?>" decoding="async" loading="lazy">
-                                </button>
-                            <?php } ?>
+            <?php
+                $link_group = SCF::get('gallery-image__list');
+            ?>
+            <?php if ($link_group) : ?>
+                <section class="aboutAs-gallery page-content__section">
+                    <div class="inner">
+                        <div class="section-title">
+                            <span class="section-title__sub" aria-hidden="true">Gallery</span>
+                            <h2 class="section-title__main">フォト</h2>
                         </div>
+                        <div class="aboutAs-gallery__post gallery-post">
+                            <div class="gallery-post__grid-items">
+                                <?php foreach ($link_group as $fields ) : ?>
+                                    <button class="modal-btn gallery-post__grid-item" data-micromodal-trigger="modal-<?php echo $fields['gallery-order']; ?>" aria-label="モーダルボタン">
+                                        <img class="gallery-img" src="<?php echo wp_get_attachment_url($fields['gallery-image']); ?>" alt="<?php echo $fields['gallery-alt']; ?>" decoding="async" loading="lazy">
+                                    </button>
+                                <?php endforeach; ?>
+                            </div>
 
-                        <div class="gallery-post__modal-slide">
-                            <?php
-                                $link_group = SCF::get('gallery-image__list');
-                                foreach ($link_group as $fields ) {
-                                ?>
-                                <div class="micromodal-slide" id="modal-<?php echo $fields['gallery-order']; ?>" aria-hidden="true">
-                                    <div class="modal__overlay" tabindex="-1" data-micromodal-close>
-                                        <div class="modal__container" role="dialog" aria-modal="true">
-                                            <img class="gallery-img_lg" src="<?php echo wp_get_attachment_url($fields['gallery-image']); ?>" alt="<?php echo $fields['gallery-alt']; ?>" data-micromodal-close />
+                            <div class="gallery-post__modal-slide">
+                                <?php foreach ($link_group as $fields ) : ?>
+                                    <div class="micromodal-slide" id="modal-<?php echo $fields['gallery-order']; ?>" aria-hidden="true">
+                                        <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+                                            <div class="modal__container" role="dialog" aria-modal="true">
+                                                <img class="gallery-img_lg" src="<?php echo wp_get_attachment_url($fields['gallery-image']); ?>" alt="<?php echo $fields['gallery-alt']; ?>" data-micromodal-close />
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            <?php } ?>
+                                <?php endforeach; ?>
+                            </div><!-- gallery-post__modal-slide -->
 
-                        </div><!-- gallery-post__modal-slide -->
+                        </div><!-- aboutAs-gallery__post gallery-post -->
+                    </div><!-- inner -->
+                </section><!-- aboutAs-gallery -->
+            <?php endif; ?>
 
-                    </div><!-- aboutAs-gallery__post gallery-post -->
-                </div><!-- inner -->
-            </section><!-- aboutAs-gallery -->
         </div><!-- page-content -->
 
         <?php get_template_part( 'template-parts/section-contact' ); ?>
 
     </main>
 
-  <?php get_footer(); ?>
+<?php get_footer(); ?>

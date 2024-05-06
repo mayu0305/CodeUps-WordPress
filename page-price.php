@@ -19,7 +19,7 @@
                 <ul class="price-content__items">
 
                 <?php
-                    for ($i = 1; $i <= 4; $i++) :
+                    for ($i = 1; $i <= 10; $i++) :
                     $priceItems = SCF::get_option_meta('price-options', "price-item0$i");
                     $programName = SCF::get_option_meta('price-options', "program0$i");
 
@@ -51,9 +51,7 @@
                     </div>
                 </li><!-- price-content__item -->
 
-                <?php endif;
-                    endfor;
-                ?>
+                <?php endif; endfor; ?>
 
                 </ul><!-- price-content__items -->
             </div><!-- inner inner--narrow -->

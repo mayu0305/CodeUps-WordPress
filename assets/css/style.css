@@ -672,11 +672,31 @@ a {
 	color: #fff;
 }
 
+.wpcf7-response-output{
+	/* display: none; */
+}
+
 .contact__form .wpcf7-not-valid-tip{
 	font-size: 0.875rem;
 	position: absolute;
     top: -5.3vw;
-    margin-left: -2.5em;
+    /* margin-left: -2.5em; */
+	display: none;
+	/* display: inline; */
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.wpcf7-response-output{
+	color: #dc3232;
+	font-size: 0.875rem;
+	font-weight: normal;
+	/* text-align: center; */
+	position: absolute;
+    top: -7em;
+    left: 50%;
+    transform: translateX(-50%);
+    border-color: transparent !important;
 }
 
 .contact__form  .wpcf7-form-control-wrap {
@@ -2767,6 +2787,21 @@ html {
 
 .aboutAs-gallery__post {
 	margin-top: 5rem;
+	position: relative;
+}
+
+.aboutAs-gallery__post::before{
+	background-image: url(../images/common/icon-fish--left.svg);
+	background-repeat: no-repeat;
+	background-size: contain;
+	content: "";
+	display: block;
+	height: 3.125rem;
+	height: 8.625rem;
+	position: absolute;
+	right: calc(50% - min(48.5vw, 40rem));
+	top: -14.125rem;
+	width: 18.8125rem;
 }
 
 .gallery-post__grid-items {
@@ -3266,20 +3301,6 @@ html {
 
 .aboutAs-intro {
 	padding-top: 5rem;
-}
-
-.aboutAs-intro--page::before {
-	background-image: url(../images/common/icon-fish--left.svg);
-	background-repeat: no-repeat;
-	background-size: contain;
-	content: "";
-	display: block;
-	height: 3.125rem;
-	height: 8.625rem;
-	position: absolute;
-	right: calc(50% - min(48.5vw, 40rem));
-	top: calc(100% + 2.5rem);
-	width: 18.8125rem;
 }
 
 .aboutAs-intro__img-main {

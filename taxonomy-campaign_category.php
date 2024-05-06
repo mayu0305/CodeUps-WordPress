@@ -18,7 +18,7 @@
             <div class="inner">
 
             <ul class="js-tabGroup course-tab__items">
-                <li class="course-tab__item"><a href="<?php echo esc_url( home_url() ); ?>/campaign/">All</a></li>
+                <li class="course-tab__item"><a href="<?php echo esc_url( home_url('/campaign/') ); ?>">All</a></li>
                 <?php
                     $terms = get_terms(array(
                         'taxonomy' => 'campaign_category',

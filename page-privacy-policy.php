@@ -16,27 +16,30 @@
                 </picture>
             </div>
             <h1 class="page-header__title">
-                <?php if( is_page('12') ) : ?>
-                    Privacy Policy
-                <?php elseif ( is_page('10') ) :?>
-                    Terms of Service
-                <?php else: ?>
-                <?php endif; ?>
+                Privacy Policy
             </h1>
         </div>
 
         <?php get_template_part( 'template-parts/breadcrumb' ); ?>
 
-        <div class="page-content">
-            <div class="inner inner--policy-terms">
-                <h2 class="policy-terms__title">
-                    <?php the_title(); ?>
-                </h2>
-                <div class="policy-terms__body">
-                    <?php the_content(); ?>
-                </div>
-            </div><!-- inner -->
-        </div><!-- page-content -->
+        <?php if ( have_posts() ) : ?>
+            <?php while ( have_posts() ) : the_post(); ?>
+
+            <div class="page-content">
+                <div class="inner inner--policy-terms">
+                    <h2 class="policy-terms__title">
+                        <?php the_title(); ?>
+                    </h2>
+                    <div class="policy-terms__body">
+                        <?php the_content(); ?>
+                    </div>
+                </div><!-- inner -->
+            </div><!-- page-content -->
+
+        <?php
+            endwhile;
+            endif;
+        ?>
 
         <?php get_template_part( 'template-parts/section-contact' ); ?>
 

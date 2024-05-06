@@ -18,7 +18,7 @@
             <div class="inner">
 
             <ul class="course-tab__items">
-                <li class="course-tab__item is-active"><a href="<?php echo esc_url( home_url() ); ?>/campaign/">All</a></li>
+                <li class="course-tab__item is-active"><a href="<?php echo esc_url( home_url('/campaign/') ); ?>">All</a></li>
                 <?php
                     $terms = get_terms(array(
                         'taxonomy' => 'campaign_category',
@@ -67,21 +67,27 @@
                                     全部コミコミ(お一人様)
                                 </span>
                                 <div class="campaign-card__content-price">
-                                    <span class="campaign-card__content-price-regular">¥<?php the_field('list-price'); ?></span>
-                                    <span class="campaign-card__content-price-sale campaign-card__content-price-sale--page">¥<?php the_field('campaign-price'); ?></span>
+                                    <?php if(get_field('list-price')): ?>
+                                        <span class="campaign-card__content-price-regular">¥<?php the_field('list-price'); ?></span>
+                                    <?php endif; ?>
+                                    <?php if(get_field('campaign-price')): ?>
+                                        <span class="campaign-card__content-price-sale campaign-card__content-price-sale--page">¥<?php the_field('campaign-price'); ?></span>
+                                    <?php endif; ?>
                                 </div>
                                 <div class="campaign-card__description u-desktop ">
                                     <?php the_content(); ?>
                                 </div>
                                 <div class="campaign-card__info u-desktop ">
-                                    <span class="campaign-card__info-period">
-                                    <?php the_field('period'); ?>
-                                    </span>
+                                    <?php if(get_field('period')): ?>
+                                        <span class="campaign-card__info-period">
+                                            <?php the_field('period'); ?>
+                                        </span>
+                                    <?php endif; ?>
                                     <span class="campaign-card__info-guid">
                                         ご予約・お問い合わせはコチラ
                                     </span>
                                     <div class="campaign-card__info-link">
-                                        <a class="link-button" href="<?php echo esc_url(home_url()); ?>/contact/">
+                                        <a class="link-button" href="<?php echo esc_url(home_url('/contact/')); ?>">
                                             <span class="link-button__text">Contact us</span>
                                             <span class="link-button__arrow">
                                             </span>

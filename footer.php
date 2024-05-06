@@ -1,11 +1,12 @@
-
-    <?php if( is_404() ) : ?>
-        <footer class="footer footer--404">
-    <?php elseif ( is_page( array('14','16','18') ) ) :?>
-        <footer class="footer footer--contact">
-    <?php else: ?>
-        <footer class="footer">
-    <?php endif; ?>
+<?php
+        $footer_class = 'footer';
+        if (is_404()) {
+            $footer_class .= ' footer--404';
+        } elseif (is_page(array('contact', 'thanks'))) {
+            $footer_class .= ' footer--contact';
+        }
+    ?>
+    <footer class="<?php echo $footer_class; ?>">
 
         <a href="#top" class="to-top">
             <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/to-top.svg" alt="トップへ戻るボタン" decoding="async" loading="lazy">

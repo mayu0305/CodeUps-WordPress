@@ -22,7 +22,7 @@
             $image_count = count($pc_images);
 
             // PC画像とSP画像を対応させて出力
-            for ($i = 1; $i <= $image_count; $i++) {
+            for ($i = 1; $i <= $image_count; $i++) :
         ;?>
 
           <li class="swiper-slide fv__img">
@@ -32,8 +32,7 @@
             </picture>
           </li>
 
-        <?  }
-        endforeach;
+        <?  endfor; endforeach;
         wp_reset_postdata();
         ?>
         </ul>
@@ -90,8 +89,12 @@
                             全部コミコミ(お一人様)
                           </span>
                           <div class="campaign-card__content-price">
-                            <span class="campaign-card__content-price-regular">¥<?php the_field('list-price'); ?></span>
-                            <span class="campaign-card__content-price-sale">¥<?php the_field('campaign-price'); ?></span>
+                            <?php if(get_field('list-price')): ?>
+                              <span class="campaign-card__content-price-regular">¥<?php the_field('list-price'); ?></span>
+                            <?php endif; ?>
+                            <?php if(get_field('campaign-price')): ?>
+                              <span class="campaign-card__content-price-sale">¥<?php the_field('campaign-price'); ?></span>
+                            <?php endif; ?>
                           </div>
                         </div>
                       </div><!-- campaign-card__content-->
@@ -114,7 +117,7 @@
               <div class="swiper-button-next top-campaign__button-next"></div>
             </div>
             <div class="top-campaign__link">
-              <a class="link-button" href="<?php echo esc_url( home_url() ); ?>/campaign/">
+              <a class="link-button" href="<?php echo esc_url( home_url('/campaign/') ); ?>">
                 <span class="link-button__text">View more</span>
                 <span class="link-button__arrow">
                 </span>
@@ -150,7 +153,7 @@
               ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。
               </div>
               <div class="aboutAs-intro__text-link">
-                <a class="link-button" href="<?php echo esc_url( home_url() ); ?>/aboutus/">
+                <a class="link-button" href="<?php echo esc_url( home_url('/aboutus/') ); ?>">
                   <span class="link-button__text">View more</span>
                   <span class="link-button__arrow">
                   </span>
@@ -178,7 +181,7 @@
               正規登録店として、安心安全に初めての方でも安心安全にライセンス取得をサポート致します。
             </div>
             <div class="top-info-text__link">
-              <a class="link-button" href="<?php echo esc_url( home_url() ); ?>/information/">
+              <a class="link-button" href="<?php echo esc_url( home_url('/information/') ); ?>">
                 <span class="link-button__text">View more</span>
                 <span class="link-button__arrow">
                 </span>
@@ -244,7 +247,7 @@
         </article><!-- top-blog__items -->
 
         <div class="top-blog__link">
-          <a class="link-button" href="<?php echo esc_url( home_url() ); ?>/blog/">
+          <a class="link-button" href="<?php echo esc_url( home_url('/blog/') ); ?>">
             <span class="link-button__text">View more</span>
             <span class="link-button__arrow">
             </span>
@@ -279,32 +282,22 @@
                 <div class="voice-card__header-text">
                   <div class="voice-card__header-status">
                     <span class="voice-card__header-demographic">
-                    <?php if( get_field('age') == "10代") : ?>10代
-                          <?php elseif( get_field('age') == "20代"): ?>20代
-                          <?php elseif( get_field('age') == "30代"): ?>30代
-                          <?php elseif( get_field('age') == "40代"): ?>40代
-                          <?php elseif( get_field('age') == "50代"): ?>50代
-                          <?php elseif( get_field('age') == "60代"): ?>60代
-                          <?php elseif( get_field('age') == "70代"): ?>70代
+                      <?php if(get_field('age')): ?>
+                          <?php the_field('age'); ?>
                       <?php endif; ?>
-                      (
-                      <?php if( get_field('sex') == "女性"): ?>女性
-                          <?php elseif( get_field('sex') == "男性"): ?>男性
-                          <?php elseif( get_field('sex') == "未選択"): ?>未選択
-                          <?php elseif( get_field('sex') == "カップル"): ?>カップル
-                          <?php elseif( get_field('sex') == "夫婦"): ?>夫婦
-                      <?php endif; ?>
-                      )
+                      <?php if(get_field('sex')): ?>
+                          (<?php the_field('sex'); ?>)
+                          <?php endif; ?>
                     </span>
-                    <span class="card-tag">
-                    <?php
-                        $cterms = get_the_terms(get_the_ID(), $taxonomy_slug);
-                        if ($cterms && !is_wp_error($cterms)) :
-                            foreach ($cterms as $term) :
-                                echo esc_html($term->name);
-                            endforeach;
-                        endif;
-                        ?>
+                    <span span class="card-tag">
+                      <?php
+                          $cterms = get_the_terms(get_the_ID(), $taxonomy_slug);
+                          if ($cterms && !is_wp_error($cterms)) :
+                              foreach ($cterms as $term) :
+                                  echo esc_html($term->name);
+                              endforeach;
+                          endif;
+                          ?>
                     </span>
                   </div>
                   <h3 class="voice-card__header-title">
@@ -330,7 +323,7 @@
 
         </ul><!-- top-voice__items -->
         <div class="top-voice__link">
-          <a class="link-button" href="<?php echo esc_url( home_url() ); ?>/voice/">
+          <a class="link-button" href="<?php echo esc_url( home_url('/voice/') ); ?>">
             <span class="link-button__text">View more</span>
             <span class="link-button__arrow">
             </span>
@@ -349,7 +342,7 @@
           <ul class="top-price__contents-items top-price-lists">
 
           <?php
-            for ($i = 1; $i <= 4; $i++) :
+            for ($i = 1; $i <= 10; $i++) :
               $priceItems = SCF::get_option_meta('price-options', "price-item0$i");
               $programName = SCF::get_option_meta('price-options', "program0$i");
 
@@ -394,7 +387,7 @@
           </figure>
         </div><!-- top-price__contents -->
         <div class="top-price__link">
-          <a class="link-button" href="<?php echo esc_url( home_url() ); ?>/price/">
+          <a class="link-button" href="<?php echo esc_url( home_url('/price/') ); ?>">
             <span class="link-button__text">View more</span>
             <span class="link-button__arrow">
             </span>

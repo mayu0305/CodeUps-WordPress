@@ -14,7 +14,7 @@
                         お探しのページが見つかりません。
                     </p>
                     <div class="error-404____link">
-                        <a class="link-button link-button--404" href="/">
+                        <a class="link-button link-button--404" href="<?php echo esc_url( home_url('/') ); ?>">
                             <span class="link-button__text">Page TOP</span>
                             <span class="link-button__arrow link-button__arrow--white link-button__arrow--404">
                             </span>

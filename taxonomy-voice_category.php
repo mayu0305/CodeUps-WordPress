@@ -18,7 +18,7 @@
             <div class="inner">
 
             <ul class="course-tab__items">
-                <li class="course-tab__item"><a href="<?php echo esc_url( home_url() ); ?>/voice/">All</a></li>
+                <li class="course-tab__item"><a href="<?php echo esc_url( home_url('/voice/') ); ?>">All</a></li>
                 <?php
                     $terms = get_terms(array(
                         'taxonomy' => 'voice_category',

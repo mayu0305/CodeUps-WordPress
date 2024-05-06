@@ -20,49 +20,49 @@
   <header class="header js-header">
     <div class="header__content">
       <h1 class="header__logo">
-        <a href="<?php echo esc_url(home_url()); ?>/">
+        <a href="<?php echo esc_url(home_url('/')); ?>">
           <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/logo--white.svg" alt="CodeUps" decoding="async">
         </a>
       </h1>
       <nav class="header__nav  u-desktop">
         <ul class="header__nav-items">
           <li class="header__nav-item">
-            <a href="<?php echo esc_url(home_url()); ?>/campaign/">キャンペーン
+            <a href="<?php echo esc_url(home_url('/campaign/')); ?>">キャンペーン
               <span aria-hidden="true">Campaign</span>
             </a>
           </li>
           <li class="header__nav-item">
-            <a href="<?php echo esc_url(home_url()); ?>/aboutus/">私たちについて
+            <a href="<?php echo esc_url(home_url('/aboutus/')); ?>">私たちについて
               <span aria-hidden="true">About us</span>
             </a>
           </li>
           <li class="header__nav-item">
-            <a href="<?php echo esc_url(home_url()); ?>/information/">ダイビング情報
+            <a href="<?php echo esc_url(home_url('/information/')); ?>">ダイビング情報
               <span aria-hidden="true">Information</span>
             </a>
           </li>
           <li class="header__nav-item">
-            <a href="<?php echo esc_url(home_url()); ?>/blog/">ブログ
+            <a href="<?php echo esc_url(home_url('/blog/')); ?>">ブログ
               <span aria-hidden="true">Blog</span>
             </a>
           </li>
           <li class="header__nav-item">
-            <a href="<?php echo esc_url(home_url()); ?>/voice/">お客様の声
+            <a href="<?php echo esc_url(home_url('/voice/')); ?>">お客様の声
               <span aria-hidden="true">Voice</span>
             </a>
           </li>
           <li class="header__nav-item">
-            <a href="<?php echo esc_url(home_url()); ?>/price/">料金一覧
+            <a href="<?php echo esc_url(home_url('/price/')); ?>">料金一覧
               <span aria-hidden="true">Price</span>
             </a>
           </li>
           <li class="header__nav-item">
-            <a href="<?php echo esc_url(home_url()); ?>/faq/">よくある質問
+            <a href="<?php echo esc_url(home_url('/faq/')); ?>">よくある質問
               <span aria-hidden="true">FAQ</span>
             </a>
           </li>
           <li class="header__nav-item">
-            <a href="<?php echo esc_url(home_url()); ?>/contact/">お問合せ
+            <a href="<?php echo esc_url(home_url('/contact/')); ?>">お問合せ
               <span aria-hidden="true">Contact</span>
             </a>
           </li>

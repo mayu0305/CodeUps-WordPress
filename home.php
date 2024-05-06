@@ -66,7 +66,7 @@
 
                     </div><!-- blog-content__main -->
 
-                    <?php get_template_part( 'template-parts/aside' ); ?>
+                    <?php get_sidebar(); ?>
 
                 </div><!-- blog-content__body -->
             </div><!-- inner -->

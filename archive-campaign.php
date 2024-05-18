@@ -46,6 +46,8 @@
                     <?php if ( have_posts() ) : ?>
                         <?php while ( have_posts() ) : the_post(); ?>
 
+                        <?php $campaignDetail = get_field('campaign-detail'); ?>
+
                         <div class="campaign-card campaign-cards__item">
                             <div class="campaign-card__content campaign-card__content--page">
                                 <div class="campaign-card__content-header">
@@ -67,20 +69,20 @@
                                     全部コミコミ(お一人様)
                                 </span>
                                 <div class="campaign-card__content-price">
-                                    <?php if(get_field('list-price')): ?>
-                                        <span class="campaign-card__content-price-regular">¥<?php the_field('list-price'); ?></span>
+                                    <?php if($campaignDetail['l-price']): ?>
+                                        <span class="campaign-card__content-price-regular">¥<?php echo $campaignDetail['l-price']; ?></span>
                                     <?php endif; ?>
-                                    <?php if(get_field('campaign-price')): ?>
-                                        <span class="campaign-card__content-price-sale campaign-card__content-price-sale--page">¥<?php the_field('campaign-price'); ?></span>
+                                    <?php if($campaignDetail['c-price']): ?>
+                                        <span class="campaign-card__content-price-sale campaign-card__content-price-sale--page">¥<?php echo $campaignDetail['c-price']; ?></span>
                                     <?php endif; ?>
                                 </div>
                                 <div class="campaign-card__description u-desktop ">
                                     <?php the_content(); ?>
                                 </div>
                                 <div class="campaign-card__info u-desktop ">
-                                    <?php if(get_field('period')): ?>
+                                    <?php if($campaignDetail['start']): ?>
                                         <span class="campaign-card__info-period">
-                                            <?php the_field('period'); ?>
+                                            <?php echo $campaignDetail['start']; ?>-<?php echo $campaignDetail['end']; ?>
                                         </span>
                                     <?php endif; ?>
                                     <span class="campaign-card__info-guid">
@@ -95,11 +97,11 @@
                                     </div>
                                 </div>
                             </div><!-- campaign-card__content-->
+                            <?php $image = $campaignDetail['c-img']; if( !empty($image) ): ?>
                             <figure class="campaign-card__img">
-                                <?php $image = get_field('image'); if( !empty($image) ): ?>
-                                    <img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" decoding="async" loading="lazy">
-                                <?php endif; ?>
+                                <img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" decoding="async" loading="lazy">
                             </figure>
+                            <?php endif; ?>
                         </div><!-- campaign-card-->
                     <?php endwhile;
                         endif;

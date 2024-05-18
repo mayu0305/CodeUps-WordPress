@@ -18,21 +18,19 @@
             <div class="inner inner--narrow">
                 <div class="faq-content__items">
                     <?php
-                        $faqItems = SCF::get_option_meta('faq-options', "faq-list");
-                        foreach ($faqItems as $faqItem ) :
+                        $link_group = SCF::get('faq-list');
+                        foreach ($link_group as $fields ) :
                     ?>
-
                         <details class="faq-content__item faq-item js-faqItem">
                             <summary class="faq-item__question js-faqQuestion">
-                            <?php echo $faqItem['question']; ?>
+                            <?php echo $fields['question']; ?>
                             </summary>
                             <div class="faq-item__answer js-faqAnswer">
                                 <p class="faq-item__answer-text">
-                                    <?php echo $faqItem['answer']; ?>
+                                    <?php echo $fields['answer']; ?>
                                 </p>
                             </div>
                         </details>
-
                     <?php endforeach; ?>
                 </div>
             </div><!-- inner -->
